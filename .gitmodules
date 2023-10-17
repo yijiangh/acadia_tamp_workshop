@@ -1,3 +1,6 @@
 [submodule "external/compas_fab"]
 	path = external/compas_fab
 	url = https://github.com/yck011522/compas_fab
+[submodule "external/compas_fab_pychoreo"]
+	path = external/compas_fab_pychoreo
+	url = https://github.com/yijiangh/compas_fab_pychoreo
