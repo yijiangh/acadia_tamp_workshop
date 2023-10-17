@@ -4,3 +4,6 @@
 [submodule "external/compas_fab_pychoreo"]
 	path = external/compas_fab_pychoreo
 	url = https://github.com/yijiangh/compas_fab_pychoreo
+[submodule "external/ikfast_pybind"]
+	path = external/ikfast_pybind
+	url = https://github.com/yijiangh/ikfast_pybind
