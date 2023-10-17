@@ -40,6 +40,7 @@ Run this the following in terminal from the root folder of this repo. All librar
 # Install the submodule libraries from source
 pip install -e .\external\compas_fab
 pip install -e .\external\compas_fab_pychoreo
+pip install -e .\external\ikfast_pybind
 
 ```
 
