@@ -1,0 +1,351 @@
+{
+    "dtype": "compas_fab.planning/SceneState", 
+    "guid": "45d39b74-fa25-4a6a-85af-601131750a89", 
+    "value": {
+        "robot_state": {
+            "dtype": "compas_fab.planning/RobotState", 
+            "guid": "c619e9ff-7b1e-4aaf-926e-7473e5029224", 
+            "value": {
+                "configuration": {
+                    "dtype": "compas.robots/Configuration", 
+                    "guid": "eaa81705-e9e3-4767-a017-1e8ea5c1b0b4", 
+                    "value": {
+                        "joint_names": [
+                            "joint_1", 
+                            "joint_2", 
+                            "joint_3", 
+                            "joint_4", 
+                            "joint_5", 
+                            "joint_6"
+                        ], 
+                        "joint_types": [
+                            0, 
+                            0, 
+                            0, 
+                            0, 
+                            0, 
+                            0
+                        ], 
+                        "joint_values": [
+                            0.0, 
+                            0.0, 
+                            0.0, 
+                            0.0, 
+                            0.0, 
+                            0.0
+                        ]
+                    }
+                }, 
+                "frame": {
+                    "dtype": "compas.geometry/Frame", 
+                    "guid": "6ab6a87f-b8e1-48bd-9237-485681cca89c", 
+                    "value": {
+                        "point": [
+                            1.5799999999999998, 
+                            0.0, 
+                            1.7649999999999999
+                        ], 
+                        "xaxis": [
+                            3.6326793907924459e-05, 
+                            0.0, 
+                            -0.99999999934018202
+                        ], 
+                        "yaxis": [
+                            0.0, 
+                            1.0, 
+                            0.0
+                        ]
+                    }
+                }
+            }
+        }, 
+        "tool_ids": [
+            "g1"
+        ], 
+        "tool_states": {
+            "g1": {
+                "dtype": "compas_fab.planning/ToolState", 
+                "guid": "25669cdf-620c-437d-adaf-33c61044c6ef", 
+                "value": {
+                    "attached_to_robot": false, 
+                    "attached_to_robot_grasp": null, 
+                    "configuration": null, 
+                    "frame": {
+                        "dtype": "compas.geometry/Frame", 
+                        "guid": "6ab6a87f-b8e1-48bd-9237-485681cca89c", 
+                        "value": {
+                            "point": [
+                                1.5799999999999998, 
+                                0.0, 
+                                1.7649999999999999
+                            ], 
+                            "xaxis": [
+                                3.6326793907924459e-05, 
+                                0.0, 
+                                -0.99999999934018202
+                            ], 
+                            "yaxis": [
+                                0.0, 
+                                1.0, 
+                                0.0
+                            ]
+                        }
+                    }, 
+                    "tool_id": "g1"
+                }
+            }
+        }, 
+        "workpiece_ids": [
+            "b2", 
+            "b5", 
+            "b0", 
+            "b3", 
+            "b1", 
+            "b6", 
+            "b4", 
+            "b7"
+        ], 
+        "workpiece_states": {
+            "b0": {
+                "dtype": "compas_fab.planning/WorkpieceState", 
+                "guid": "8c4b40dc-4e4d-4a31-a4bf-994e2666d232", 
+                "value": {
+                    "attached_to_tool_grasp": null, 
+                    "attached_to_tool_id": null, 
+                    "frame": {
+                        "dtype": "compas.geometry/Frame", 
+                        "guid": "8eda6e5d-92ea-4041-a4aa-a019546c90be", 
+                        "value": {
+                            "point": [
+                                0.0, 
+                                0.0, 
+                                0.0
+                            ], 
+                            "xaxis": [
+                                1.0, 
+                                0.0, 
+                                0.0
+                            ], 
+                            "yaxis": [
+                                0.0, 
+                                1.0, 
+                                0.0
+                            ]
+                        }
+                    }, 
+                    "workpiece_id": "b0"
+                }
+            }, 
+            "b1": {
+                "dtype": "compas_fab.planning/WorkpieceState", 
+                "guid": "75e44cf2-0867-4aee-80e1-8f0f2e2823a2", 
+                "value": {
+                    "attached_to_tool_grasp": null, 
+                    "attached_to_tool_id": null, 
+                    "frame": {
+                        "dtype": "compas.geometry/Frame", 
+                        "guid": "a4e36580-42c2-4491-bf78-abf72ea244eb", 
+                        "value": {
+                            "point": [
+                                0.0, 
+                                0.0, 
+                                0.0
+                            ], 
+                            "xaxis": [
+                                1.0, 
+                                0.0, 
+                                0.0
+                            ], 
+                            "yaxis": [
+                                0.0, 
+                                1.0, 
+                                0.0
+                            ]
+                        }
+                    }, 
+                    "workpiece_id": "b1"
+                }
+            }, 
+            "b2": {
+                "dtype": "compas_fab.planning/WorkpieceState", 
+                "guid": "6da8a494-7645-41b0-a1f5-bc377d0b9cf2", 
+                "value": {
+                    "attached_to_tool_grasp": null, 
+                    "attached_to_tool_id": null, 
+                    "frame": {
+                        "dtype": "compas.geometry/Frame", 
+                        "guid": "476aa115-bc96-4dcb-9ce4-822da44e8867", 
+                        "value": {
+                            "point": [
+                                0.0, 
+                                0.0, 
+                                0.0
+                            ], 
+                            "xaxis": [
+                                1.0, 
+                                0.0, 
+                                0.0
+                            ], 
+                            "yaxis": [
+                                0.0, 
+                                1.0, 
+                                0.0
+                            ]
+                        }
+                    }, 
+                    "workpiece_id": "b2"
+                }
+            }, 
+            "b3": {
+                "dtype": "compas_fab.planning/WorkpieceState", 
+                "guid": "fdc9a9b4-bbbe-47ad-8901-34cfef9c4a74", 
+                "value": {
+                    "attached_to_tool_grasp": null, 
+                    "attached_to_tool_id": null, 
+                    "frame": {
+                        "dtype": "compas.geometry/Frame", 
+                        "guid": "b4355e1d-89dc-4be4-8d62-614a4ffe15b5", 
+                        "value": {
+                            "point": [
+                                0.0, 
+                                0.0, 
+                                0.0
+                            ], 
+                            "xaxis": [
+                                1.0, 
+                                0.0, 
+                                0.0
+                            ], 
+                            "yaxis": [
+                                0.0, 
+                                1.0, 
+                                0.0
+                            ]
+                        }
+                    }, 
+                    "workpiece_id": "b3"
+                }
+            }, 
+            "b4": {
+                "dtype": "compas_fab.planning/WorkpieceState", 
+                "guid": "c0e07095-5673-4e90-8cc7-19f021b80eeb", 
+                "value": {
+                    "attached_to_tool_grasp": null, 
+                    "attached_to_tool_id": null, 
+                    "frame": {
+                        "dtype": "compas.geometry/Frame", 
+                        "guid": "c8aa7402-a69a-47a2-bd07-9eeb9587b425", 
+                        "value": {
+                            "point": [
+                                0.0, 
+                                0.0, 
+                                0.0
+                            ], 
+                            "xaxis": [
+                                1.0, 
+                                0.0, 
+                                0.0
+                            ], 
+                            "yaxis": [
+                                0.0, 
+                                1.0, 
+                                0.0
+                            ]
+                        }
+                    }, 
+                    "workpiece_id": "b4"
+                }
+            }, 
+            "b5": {
+                "dtype": "compas_fab.planning/WorkpieceState", 
+                "guid": "ce609d61-0da1-40a2-8b96-156ab7ae0463", 
+                "value": {
+                    "attached_to_tool_grasp": null, 
+                    "attached_to_tool_id": null, 
+                    "frame": {
+                        "dtype": "compas.geometry/Frame", 
+                        "guid": "1691f9e4-61bf-4e39-8048-77aa4ea60f64", 
+                        "value": {
+                            "point": [
+                                0.0, 
+                                0.0, 
+                                0.0
+                            ], 
+                            "xaxis": [
+                                1.0, 
+                                0.0, 
+                                0.0
+                            ], 
+                            "yaxis": [
+                                0.0, 
+                                1.0, 
+                                0.0
+                            ]
+                        }
+                    }, 
+                    "workpiece_id": "b5"
+                }
+            }, 
+            "b6": {
+                "dtype": "compas_fab.planning/WorkpieceState", 
+                "guid": "e3339397-fd90-4448-8e64-8f3ef6f19ab1", 
+                "value": {
+                    "attached_to_tool_grasp": null, 
+                    "attached_to_tool_id": null, 
+                    "frame": {
+                        "dtype": "compas.geometry/Frame", 
+                        "guid": "f30c4e87-9ffd-4f5a-9547-ad3f9789e103", 
+                        "value": {
+                            "point": [
+                                0.0, 
+                                0.0, 
+                                0.0
+                            ], 
+                            "xaxis": [
+                                1.0, 
+                                0.0, 
+                                0.0
+                            ], 
+                            "yaxis": [
+                                0.0, 
+                                1.0, 
+                                0.0
+                            ]
+                        }
+                    }, 
+                    "workpiece_id": "b6"
+                }
+            }, 
+            "b7": {
+                "dtype": "compas_fab.planning/WorkpieceState", 
+                "guid": "41a978b8-2cc4-4e28-bf92-8571923d648a", 
+                "value": {
+                    "attached_to_tool_grasp": null, 
+                    "attached_to_tool_id": null, 
+                    "frame": {
+                        "dtype": "compas.geometry/Frame", 
+                        "guid": "41c38060-0eaf-48bb-8862-eaeeeca068a2", 
+                        "value": {
+                            "point": [
+                                0.0, 
+                                0.0, 
+                                0.0
+                            ], 
+                            "xaxis": [
+                                1.0, 
+                                0.0, 
+                                0.0
+                            ], 
+                            "yaxis": [
+                                0.0, 
+                                1.0, 
+                                0.0
+                            ]
+                        }
+                    }, 
+                    "workpiece_id": "b7"
+                }
+            }
+        }
+    }
+}
