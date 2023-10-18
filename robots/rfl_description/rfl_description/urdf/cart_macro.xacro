@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find abb_resources)/urdf/common_materials.xacro"/>
+  <xacro:macro name="xy_cart" params="prefix group connected_to upper_limit lower_limit rotated">
+
+    <joint name="${prefix}_joint_EA_Y" type="prismatic">
+      <parent link="${connected_to}"/>
+      <child link="${prefix}_xy_cart"/>
+      <origin xyz="0 0 0" rpy="0 0 0 "/>
+      <axis xyz="0 -1 0"/>
+      <limit lower="${lower_limit}" upper="${upper_limit}" effort="100000" velocity="2.618" />
+      <dynamics damping="0.2" friction="0"/>
+    </joint>
+
+    <link name="${prefix}_xy_cart">
+      <inertial>
+        <origin xyz="0.0 0.0 0.0"/>
+        <mass value="120.00000"/>
+        <inertia ixx="-4.98000" iyy="-5.95200" izz="0.82800" ixy="-0.00000" ixz="2.70000" iyz="-0.00000"/>
+      </inertial>
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 ${pi*rotated}"/>
+        <geometry>
+          <mesh filename="package://rfl_description/meshes/visual/${group}_xy_cart.stl"/>
+        </geometry>
+        <xacro:material_abb_white />
+      </visual>
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 ${pi*rotated}"/>
+        <geometry>
+          <mesh filename="package://rfl_description/meshes/collision/${group}_xy_cart.stl"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="${prefix}_joint_EA_Z" type="prismatic">
+      <parent link="${prefix}_xy_cart"/>
+      <child link="${prefix}_base"/>
+      <origin xyz="0 0 0" rpy="0 0 0 "/>
+      <axis xyz="0 0 -1"/>
+      <limit lower="-4.915" upper="-1.005" effort="100000" velocity="2.618" />
+      <dynamics damping="0.2" friction="0" />
+    </joint>
+
+    <link name="${prefix}_base">
+      <inertial>
+        <origin xyz="0.0 0.0 0.0"/>
+        <mass value="120.00000"/>
+        <inertia ixx="-4.98000" iyy="-5.95200" izz="0.82800" ixy="-0.00000" ixz="2.70000" iyz="-0.00000"/>
+      </inertial>
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 ${pi*rotated}"/>
+        <geometry>
+          <mesh filename="package://rfl_description/meshes/visual/${group}_z_axis.stl"/>
+        </geometry>
+        <xacro:material_abb_white />
+      </visual>
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 ${pi*rotated}"/>
+        <geometry>
+          <mesh filename="package://rfl_description/meshes/collision/${group}_z_axis.stl"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="${prefix}_joint_0" type="fixed">
+      <parent link="${prefix}_base"/>
+      <child link="${prefix}_base_link"/>
+      <origin xyz="0 0 0" rpy="${pi} 0 ${pi*rotated}"/>
+      <dynamics damping="0.2" friction="0" />
+    </joint>
+
+    <!-- robot  -->
+    <xacro:abb_irb4600_40_255 prefix="${prefix}_"/>
+
+  </xacro:macro>
+</robot>

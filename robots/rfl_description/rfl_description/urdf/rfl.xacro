@@ -1,0 +1,55 @@
+<robot name="rfl" 
+  xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find abb_resources)/urdf/common_materials.xacro"/>
+  <xacro:include filename="$(find rfl_description)/urdf/bridge_macro.xacro"/>
+  <xacro:include filename="$(find rfl_description)/urdf/cart_macro.xacro"/>
+  <xacro:include filename="$(find abb_irb4600_40_255)/urdf/abb_irb4600_40_255_macro.xacro"/>
+
+  <link name="world">
+    <visual>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://rfl_description/meshes/visual/rfl_floor_and_columns.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://rfl_description/meshes/collision/rfl_floor_and_columns.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="world_joint" type="fixed">
+    <parent link="world"/>
+    <child link="x_rail"/>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+  </joint>
+
+  <link name="x_rail">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rfl_description/meshes/visual/x_rail.stl"/>
+      </geometry>
+      <xacro:material_abb_white/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rfl_description/meshes/collision/x_rail.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- BRIDGE 1 -->
+  <xacro:bridge prefix="bridge1" connected_to="x_rail" upper_limit="37.206" lower_limit="0.0" rotated="0" />
+  <xacro:xy_cart prefix="robot11" group="group1" connected_to="bridge1" upper_limit="0.0" lower_limit="-9.65" rotated="0" />
+  <xacro:xy_cart prefix="robot12" group="group2" connected_to="bridge1" upper_limit="-2.587" lower_limit="-12.237" rotated="0" />
+
+  <!-- BRIDGE 2 -->
+  <xacro:bridge prefix="bridge2" connected_to="x_rail" upper_limit="39.805" lower_limit="2.599" rotated="1" />
+  <xacro:xy_cart prefix="robot21" group="group2" connected_to="bridge2" upper_limit="0.0" lower_limit="-9.65" rotated="1" />
+  <xacro:xy_cart prefix="robot22" group="group1" connected_to="bridge2" upper_limit="-2.587" lower_limit="-12.237" rotated="1" />
+
+</robot>

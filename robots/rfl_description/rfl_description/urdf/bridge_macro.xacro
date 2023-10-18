@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find abb_resources)/urdf/common_materials.xacro"/>
+  <xacro:macro name="bridge" params="prefix connected_to upper_limit lower_limit rotated">
+
+    <joint name="${prefix}_joint_EA_X" type="prismatic">
+      <parent link="${connected_to}"/>
+      <child link="${prefix}"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <axis xyz="1 0 0"/>
+      <limit lower="${lower_limit}" upper="${upper_limit}" effort="100000" velocity="2.618" />
+      <dynamics damping="0.2" friction="0" />
+    </joint>
+
+    <link name="${prefix}">
+      <inertial>
+        <origin xyz="0.0 0.0 0.0"/>
+        <mass value="120.00000"/>
+        <inertia ixx="-4.98000" iyy="-5.95200" izz="0.82800" ixy="-0.00000" ixz="2.70000" iyz="-0.00000"/>
+      </inertial>
+      <visual>
+        <origin xyz="0.0 ${12.2364997*rotated} 0.0" rpy="0 0 ${pi*rotated}"/>
+        <geometry>
+          <mesh filename="package://rfl_description/meshes/visual/y_gantry.stl"/>
+        </geometry>
+        <xacro:material_abb_white/>
+      </visual>
+      <collision>
+        <origin xyz="0.0 ${12.2364997*rotated} 0.0" rpy="0 0 ${pi*rotated}"/>
+        <geometry>
+          <mesh filename="package://rfl_description/meshes/collision/y_gantry.stl"/>
+        </geometry>
+      </collision>
+    </link>
+
+  </xacro:macro>
+</robot>

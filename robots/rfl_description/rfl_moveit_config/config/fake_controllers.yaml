@@ -1,0 +1,117 @@
+controller_list:
+  - name: fake_robot11_controller
+    joints:
+      - robot11_joint_1
+      - robot11_joint_2
+      - robot11_joint_3
+      - robot11_joint_4
+      - robot11_joint_5
+      - robot11_joint_6
+  - name: fake_robot12_controller
+    joints:
+      - robot12_joint_1
+      - robot12_joint_2
+      - robot12_joint_3
+      - robot12_joint_4
+      - robot12_joint_5
+      - robot12_joint_6
+  - name: fake_robot11_eaXYZ_controller
+    joints:
+      - bridge1_joint_EA_X
+      - robot11_joint_EA_Y
+      - robot11_joint_EA_Z
+      - robot11_joint_1
+      - robot11_joint_2
+      - robot11_joint_3
+      - robot11_joint_4
+      - robot11_joint_5
+      - robot11_joint_6
+  - name: fake_robot12_eaYZ_controller
+    joints:
+      - robot12_joint_EA_Y
+      - robot12_joint_EA_Z
+      - robot12_joint_1
+      - robot12_joint_2
+      - robot12_joint_3
+      - robot12_joint_4
+      - robot12_joint_5
+      - robot12_joint_6
+  - name: fake_robot21_controller
+    joints:
+      - robot21_joint_1
+      - robot21_joint_2
+      - robot21_joint_3
+      - robot21_joint_4
+      - robot21_joint_5
+      - robot21_joint_6
+  - name: fake_robot22_controller
+    joints:
+      - robot22_joint_1
+      - robot22_joint_2
+      - robot22_joint_3
+      - robot22_joint_4
+      - robot22_joint_5
+      - robot22_joint_6
+  - name: fake_robot21_eaXYZ_controller
+    joints:
+      - bridge2_joint_EA_X
+      - robot21_joint_EA_Y
+      - robot21_joint_EA_Z
+      - robot21_joint_1
+      - robot21_joint_2
+      - robot21_joint_3
+      - robot21_joint_4
+      - robot21_joint_5
+      - robot21_joint_6
+  - name: fake_robot22_eaYZ_controller
+    joints:
+      - robot22_joint_EA_Y
+      - robot22_joint_EA_Z
+      - robot22_joint_1
+      - robot22_joint_2
+      - robot22_joint_3
+      - robot22_joint_4
+      - robot22_joint_5
+      - robot22_joint_6
+  - name: fake_robot11_eaYZ_controller
+    joints:
+      - robot11_joint_EA_Y
+      - robot11_joint_EA_Z
+      - robot11_joint_1
+      - robot11_joint_2
+      - robot11_joint_3
+      - robot11_joint_4
+      - robot11_joint_5
+      - robot11_joint_6
+  - name: fake_robot21_eaYZ_controller
+    joints:
+      - robot21_joint_EA_Y
+      - robot21_joint_EA_Z
+      - robot21_joint_1
+      - robot21_joint_2
+      - robot21_joint_3
+      - robot21_joint_4
+      - robot21_joint_5
+      - robot21_joint_6
+  - name: fake_robot12_eaXYZ_controller
+    joints:
+      - bridge1_joint_EA_X
+      - robot12_joint_EA_Y
+      - robot12_joint_EA_Z
+      - robot12_joint_1
+      - robot12_joint_2
+      - robot12_joint_3
+      - robot12_joint_4
+      - robot12_joint_5
+      - robot12_joint_6
+  - name: fake_robot22_eaXYZ_controller
+    joints:
+      - bridge2_joint_EA_X
+      - robot22_joint_EA_Y
+      - robot22_joint_EA_Z
+      - robot22_joint_1
+      - robot22_joint_2
+      - robot22_joint_3
+      - robot22_joint_4
+      - robot22_joint_5
+      - robot22_joint_6

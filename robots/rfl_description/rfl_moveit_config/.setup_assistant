@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: rfl_description
+    relative_path: urdf/rfl.urdf
+    xacro_args: "--inorder "
+  SRDF:
+    relative_path: config/rfl.srdf
+  CONFIG:
+    author_name: Pacher Matteo
+    author_email: pacher@arch.ethz.ch
+    generated_timestamp: 1571922094
