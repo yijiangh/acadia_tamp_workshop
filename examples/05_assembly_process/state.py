@@ -1,7 +1,5 @@
 import json
-from json import tool
 import os
-from colorama import reinit
 
 from compas.data import DataDecoder, json_dumps
 from compas.robots import RobotModel
@@ -57,7 +55,8 @@ def set_state(client: PyChoreoClient, robot: RobotModel, state: SceneState, opti
     debug = options.get('debug', False)
     tool0_link_name = robot.get_end_effector_link_name()
 
-    def update_attached_state(object_id, object_state):
+    def update_attached_state(object_id, object_state, touch_links=None):
+        touch_links = touch_links or []
         object_names, status = client.get_object_names_and_status(object_id)
         assert status != 'not_exist', 'Object set object id ({}) | body names: {} as attached in scene but object not added to the scene!'.format(object_id, object_names)
 
@@ -71,13 +70,15 @@ def set_state(client: PyChoreoClient, robot: RobotModel, state: SceneState, opti
             raise TypeError('object_state must be either ToolState or WorkpieceState')
 
         if is_attached_to_robot:
-            client.add_attached_collision_mesh(
-                AttachedCollisionMesh(CollisionMesh(None, tool_id),
-                                      tool0_link_name, touch_links=[]),
-                options={'robot': robot,
-                        #  'attached_child_link_name': tool_attach_link_Name,
-                         'parent_link_from_child_link_transformation' : grasp_transformation,
-                         })
+            if status != 'attached_object':
+                # update only if the object is not already attached to the robot
+                client.add_attached_collision_mesh(
+                    AttachedCollisionMesh(CollisionMesh(None, tool_id),
+                                          tool0_link_name, touch_links=touch_links),
+                    options={'robot': robot,
+                            #  'attached_child_link_name': tool_attach_link_Name,
+                             'parent_link_from_child_link_transformation' : grasp_transformation,
+                             })
         else:
             # if the current status in the client is not attached, detach it
             if status == 'attached_object':
@@ -93,7 +94,7 @@ def set_state(client: PyChoreoClient, robot: RobotModel, state: SceneState, opti
             client.set_object_frame(tool_id, tool_state.frame)
             if tool_state.configuration:
                 client.set_tool_configuration(tool_id, tool_state.configuration)
-            update_attached_state(tool_id, tool_state)
+            update_attached_state(tool_id, tool_state, touch_links=['link_6'])
 
         # * Workpieces
         for wp_id, wp_state in state.workpiece_states.items():
