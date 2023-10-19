@@ -1,3 +1,5 @@
 # Rhino Backup
 
 *.3dmbak
+
+examples/05_assembly_process/Assembly.3dm.rhl

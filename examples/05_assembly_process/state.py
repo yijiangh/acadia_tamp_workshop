@@ -6,7 +6,7 @@ from colorama import reinit
 from compas.data import DataDecoder, json_dumps
 from compas.robots import RobotModel
 
-from compas_fab.planning import AssemblyProcess, SceneState
+from compas_fab.planning import AssemblyProcess, SceneState, ToolState, WorkpieceState, RobotState
 from compas_fab_pychoreo.client import PyChoreoClient
 from compas_fab.robots import AttachedCollisionMesh, Configuration, CollisionMesh, Robot
 from compas_fab.robots import RobotSemantics
@@ -14,7 +14,7 @@ from compas_fab.robots import RobotSemantics
 import pybullet_planning as pp
 
 HERE = os.path.dirname(__file__)
-TOOL_EXPORT_DIR = os.path.join(HERE, 'tools')
+TOOL_EXPORT_DIR = os.path.join(HERE)
 ROBOT_MODEL_DIR = os.path.join(HERE, '..', '..', 'robots')
 
 def load_robot(client: PyChoreoClient, robot_name: str):
@@ -32,24 +32,25 @@ def load_robot(client: PyChoreoClient, robot_name: str):
 
 def initialize_process_scene_state(client: PyChoreoClient, process: AssemblyProcess, options=None):
     options = options or {}
+    debug = options.get('debug', False)
 
-    # initialize all geometries in the scene
-    # * workpieces
-    for wp_id, workpiece in process.workpieces.items():
-        for i, wp_mesh in enumerate(workpiece.mesh):
-            # in case the mesh is not a triangle mesh
-            # wp_mesh = wp_mesh.copy()
-            # mesh_quads_to_triangles(wp_mesh)
-            cm = CollisionMesh(wp_mesh, wp_id)
-            if i == 0:
-                client.add_collision_mesh(cm, {'color': pp.GREY})
-            else:
-                client.append_collision_mesh(cm, {'color': pp.GREY})
+    with pp.LockRenderer(not debug):
+        # initialize all geometries in the scene
+        # * workpieces
+        for wp_id, workpiece in process.workpieces.items():
+            for i, wp_mesh in enumerate(workpiece.mesh):
+                # in case the mesh is not a triangle mesh
+                # wp_mesh = wp_mesh.copy()
+                # mesh_quads_to_triangles(wp_mesh)
+                cm = CollisionMesh(wp_mesh, wp_id)
+                if i == 0:
+                    client.add_collision_mesh(cm, {'color': pp.GREY})
+                else:
+                    client.append_collision_mesh(cm, {'color': pp.GREY})
 
-    # * tools
-    with pp.HideOutput():
-        tool_robot = pp.load_pybullet(process.tool.urdf_file_path, fixed_base=False)
-        client.collision_objects[process.tool_id] = [tool_robot]
+        # * tools
+        with pp.HideOutput():
+            client.add_tool_from_urdf(process.tool_id, process.tool.urdf_file_path(TOOL_EXPORT_DIR))
 
 def set_state(client: PyChoreoClient, robot: RobotModel, state: SceneState, options=None):
     options = options or {}
@@ -60,13 +61,22 @@ def set_state(client: PyChoreoClient, robot: RobotModel, state: SceneState, opti
         object_names, status = client.get_object_names_and_status(object_id)
         assert status != 'not_exist', 'Object set object id ({}) | body names: {} as attached in scene but object not added to the scene!'.format(object_id, object_names)
 
-        if object_state.attached_to_robot:
+        if isinstance(object_state, ToolState):
+            is_attached_to_robot = object_state.attached_to_robot
+            grasp_transformation = object_state.attached_to_robot_grasp
+        elif isinstance(object_state, WorkpieceState):
+            is_attached_to_robot = object_state.attached_to_tool_id is not None
+            grasp_transformation = object_state.attached_to_tool_grasp
+        else:
+            raise TypeError('object_state must be either ToolState or WorkpieceState')
+
+        if is_attached_to_robot:
             client.add_attached_collision_mesh(
                 AttachedCollisionMesh(CollisionMesh(None, tool_id),
                                       tool0_link_name, touch_links=[]),
                 options={'robot': robot,
                         #  'attached_child_link_name': tool_attach_link_Name,
-                         'parent_link_from_child_link_transformation' : tool_state.attached_to_robot_grasp,
+                         'parent_link_from_child_link_transformation' : grasp_transformation,
                          })
         else:
             # if the current status in the client is not attached, detach it
@@ -75,12 +85,14 @@ def set_state(client: PyChoreoClient, robot: RobotModel, state: SceneState, opti
 
     with pp.LockRenderer(not debug):
         # * Robot
-        client.set_robot_configuration(robot, state.robot_state.configuration)
+        if state.robot_state.configuration:
+            client.set_robot_configuration(robot, state.robot_state.configuration)
 
         # * Tools
         for tool_id, tool_state in state.tool_states.items():
             client.set_object_frame(tool_id, tool_state.frame)
-            client.set_tool_configuration(tool_id, tool_state.configuration)
+            if tool_state.configuration:
+                client.set_tool_configuration(tool_id, tool_state.configuration)
             update_attached_state(tool_id, tool_state)
 
         # * Workpieces
@@ -103,12 +115,16 @@ def main():
         initialize_process_scene_state(client, assembly_process)
         robot = load_robot(client, 'abb_crb15000')
         set_state(client, robot, initial_state)
+        # pp.wait_if_gui('Initial State')
 
-        pp.wait_if_gui()
+        for i in range(len(assembly_process.actions)):
+            state = assembly_process.get_intermediate_state(i)
+            set_state(client, robot, state)
+            pp.wait_if_gui(f'State {i}')
 
-        # # Print last state
-        # for i in range(len(assembly_process.actions)):
-        #     state = assembly_process.get_intermediate_state()
+        # last_state = assembly_process.get_intermediate_state(len(assembly_process.actions), debug=True)
+        # set_state(client, robot, last_state)
+        # pp.wait_if_gui(f'Last State')
 
 if __name__ == '__main__':
     main()
