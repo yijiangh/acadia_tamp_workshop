@@ -4,27 +4,32 @@
 
 ### Conda environment (required!)
 
-Create a new environment with python 3.7 and install this package in the new environment
+The following steps will create a new Conda environment with python 3.11 and install this package in the new environment.
+The new environment is named `acadia_tamp` and can be activated by `conda activate acadia_tamp`.
+Whenever you open a new terminal, you need to activate the environment again.
+These commands are best executed in the Anaconda Prompt or Anaconda Powershell Prompt.
 
 ```bash
-conda create --name acadia_tamp python=3.7
+conda create --name acadia_tamp  -c conda-forge  --yes numpy networkx scipy matplotlib-base pillow schema sympy typing_extensions watchdog "jsonschema>=4.17,<4.18" imageio pyserial pybullet roslibpy pycollada colorama python=3.11
 conda activate acadia_tamp
 ```
+### To Delete the environment
 
 ```bash
-conda install cython numpy==1.21.5 mkl-devel cmake
+conda env remove --name acadia_tamp
 ```
 
 ### Clone and update submodules
 
-Install this library from source by cloning this repo to local and install from source.
+Install this library from source by cloning this repo to a local "working directory" and install it.
+The `--recursive` flag is needed when cloning to initialize all the git submodules. You can learn more about submodules [here](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+
 
 ```bash
+cd <your working directory>
 git clone --recursive https://github.com/yijiangh/acadia_tamp_workshop.git
 cd acadia_tamp_workshop
 ```
-
-The `--recursive` flag when cloning above is used for initializing all the git submodules. You can learn more about submodules [here](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
 
 Later in the development, whenever you need to update the submodules, issue the following:
 
@@ -37,12 +42,22 @@ git submodule update --init --recursive
 Run this the following in terminal from the root folder of this repo. All libraries are installed from source (in the [editable mode](https://pip.pypa.io/en/stable/reference/pip_install/#install-editable)).
 
 ```bash
+pip install compas --no-deps
 # Install the submodule libraries from source
-pip install -e .\external\compas_fab
-pip install -e .\external\compas_fab_pychoreo
-pip install -e .\external\ikfast_pybind
-
+pip install --no-deps -e .\external\compas_fab
+pip install --no-deps -e .\external\compas_fab_pychoreo
+pip install 'pybullet_planning>=0.6.0'
+pip install -e .\external\ikfast_pybind # Only if you want to experiment IKFast later
+python -m compas_rhino.install
 ```
+
+If the installer complain about missing cython or cmake, install the following tool chain:
+
+```bash
+conda install cython numpy==1.21.5 mkl-devel cmake
+```
+
+If the installation process ask for Visual Studio Build Tools. Download the installer (Build Tools for Visual Studio 2022) from [here](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022) and install it. This may take a while
 
 TODO: to be debated if we should make this repo as a package
 
