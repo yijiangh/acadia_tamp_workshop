@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="g1">
+  <link name="gripper_base">
+    <visual>
+      <geometry>
+        <mesh filename="package://g1/meshes/visual/L0_visual_0.obj" scale="1.0 1.0 1.0" />
+      </geometry>
+      <material name="Material">
+        <color rgba="0.8 0.8 0.8 1.0" />
+      </material>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="package://g1/meshes/visual/L0_visual_1.obj" scale="1.0 1.0 1.0" />
+      </geometry>
+      <material name="Material">
+        <color rgba="0.8 0.8 0.8 1.0" />
+      </material>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="package://g1/meshes/visual/L0_visual_2.obj" scale="1.0 1.0 1.0" />
+      </geometry>
+      <material name="Material">
+        <color rgba="0.8 0.8 0.8 1.0" />
+      </material>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="package://g1/meshes/visual/L0_visual_3.obj" scale="1.0 1.0 1.0" />
+      </geometry>
+      <material name="Material">
+        <color rgba="0.8 0.8 0.8 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://g1/meshes/collision/L0_collision_0.obj" scale="1.0 1.0 1.0" />
+      </geometry>
+    </collision>
+    <collision>
+      <geometry>
+        <mesh filename="package://g1/meshes/collision/L0_collision_1.obj" scale="1.0 1.0 1.0" />
+      </geometry>
+    </collision>
+    <collision>
+      <geometry>
+        <mesh filename="package://g1/meshes/collision/L0_collision_2.obj" scale="1.0 1.0 1.0" />
+      </geometry>
+    </collision>
+    <collision>
+      <geometry>
+        <mesh filename="package://g1/meshes/collision/L0_collision_3.obj" scale="1.0 1.0 1.0" />
+      </geometry>
+    </collision>
+  </link>
+</robot>
