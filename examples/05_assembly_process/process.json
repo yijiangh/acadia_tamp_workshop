@@ -1,11 +1,11 @@
 {
     "dtype": "compas_fab.planning/AssemblyProcess", 
-    "guid": "87fad09d-76fe-4800-90fd-e60a49fbd821", 
+    "guid": "298ae0dc-3c36-46e2-a54b-74389627dfc0", 
     "value": {
         "actions": [
             {
                 "dtype": "compas_fab.planning/FreeMovement", 
-                "guid": "a39e66a6-21f5-497e-80a5-8c11181ef400", 
+                "guid": "dcf00c08-f593-4c6d-98d9-66c922f11555", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [], 
@@ -15,7 +15,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "7c6888da-9d64-455a-9a7f-2b6b3fdcf7fb", 
+                        "guid": "65c0db40-1190-4370-bef7-92495ca6aa43", 
                         "value": {
                             "point": [
                                 0.25000000000000017, 
@@ -39,12 +39,12 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LoadWorkpiece", 
-                "guid": "4b265663-77f7-4392-92c1-440dfedbf812", 
+                "guid": "4f4a6575-e837-4ac5-8379-8b468be2dbb1", 
                 "value": {
                     "act_n": -1, 
                     "frame": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "91456fe0-4b58-4405-83f5-58c9086030c1", 
+                        "guid": "5fca4521-bf05-42e5-86b8-ed63c3f5ec9f", 
                         "value": {
                             "point": [
                                 0.25000000000000011, 
@@ -69,12 +69,12 @@
             }, 
             {
                 "dtype": "compas_fab.planning/CloseGripper", 
-                "guid": "4d3e9f28-b63d-464f-9429-7e48bd1f0255", 
+                "guid": "dff860f6-8fd4-4472-9e87-f400fc182534", 
                 "value": {
                     "act_n": -1, 
                     "attached_workpiece_grasp": {
                         "dtype": "compas.geometry/Transformation", 
-                        "guid": "cde0b9d3-30de-46b4-bc1a-03bebc46deab", 
+                        "guid": "6fb330ca-b5cc-461b-a56b-eb428af191ca", 
                         "value": {
                             "matrix": [
                                 [
@@ -110,7 +110,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/FreeMovement", 
-                "guid": "9ae3edef-65f6-4fd7-81fb-6668cf018205", 
+                "guid": "e4b473f4-54a2-4b4e-b1f7-918bc5f08c55", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [], 
@@ -120,7 +120,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "bad1e899-fe84-4981-b479-0fb861137f29", 
+                        "guid": "257123cc-b4dc-45d6-9bc3-57af8b898467", 
                         "value": {
                             "point": [
                                 0.87500000000000011, 
@@ -144,7 +144,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LinearMovement", 
-                "guid": "2a5b5b93-681b-40f3-8347-a55b636ade14", 
+                "guid": "996bff99-41f6-4740-906f-aebd152db390", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [], 
@@ -154,7 +154,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "5ecefb08-5271-4a42-a594-fb6ef474d2bf", 
+                        "guid": "afab08fc-d7bc-44ff-b3fc-767e525f0508", 
                         "value": {
                             "point": [
                                 0.87500000000000011, 
@@ -178,7 +178,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/OpenGripper", 
-                "guid": "ffe73941-44f2-48a7-a7de-1edb411c611a", 
+                "guid": "7b12fe2e-bedb-49b7-a9af-672aaf2b774b", 
                 "value": {
                     "act_n": -1, 
                     "tag": "Generic Action"
@@ -186,7 +186,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LinearMovement", 
-                "guid": "91aa9411-a4de-40dd-980f-aa41f0977332", 
+                "guid": "20ab9c54-4210-46f3-9c7f-2b62f655cf77", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [], 
@@ -196,7 +196,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "9f7b0f32-10d8-420b-ad1d-73423123bcb9", 
+                        "guid": "134b5544-d37f-41d7-b514-7e3d16d0f284", 
                         "value": {
                             "point": [
                                 0.87500000000000011, 
@@ -220,7 +220,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/FreeMovement", 
-                "guid": "31bbbe75-a575-4c12-b369-d0f62960682f", 
+                "guid": "c5c7d424-11c7-4615-b544-87b7d5b9dd71", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [], 
@@ -230,7 +230,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "a820c027-0c5c-417d-91ef-32da394c7eff", 
+                        "guid": "8632c86c-74b2-4957-b4e6-88be66c8c453", 
                         "value": {
                             "point": [
                                 0.25000000000000017, 
@@ -254,12 +254,12 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LoadWorkpiece", 
-                "guid": "e53df1f9-adfd-44a8-9ed6-120bd80a94bb", 
+                "guid": "c5838a42-d86d-499c-bf9c-f9bee1b1be83", 
                 "value": {
                     "act_n": -1, 
                     "frame": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "6d80db1a-3878-464b-8d2f-fae4f01edf17", 
+                        "guid": "0a812587-f320-4f49-ba24-2160699cacd8", 
                         "value": {
                             "point": [
                                 0.25000000000000011, 
@@ -284,12 +284,12 @@
             }, 
             {
                 "dtype": "compas_fab.planning/CloseGripper", 
-                "guid": "bf2586f8-91d8-4299-86a1-40ccbd7cc348", 
+                "guid": "46fa39ca-f728-4502-8abc-e62eb7616047", 
                 "value": {
                     "act_n": -1, 
                     "attached_workpiece_grasp": {
                         "dtype": "compas.geometry/Transformation", 
-                        "guid": "cde0b9d3-30de-46b4-bc1a-03bebc46deab", 
+                        "guid": "6fb330ca-b5cc-461b-a56b-eb428af191ca", 
                         "value": {
                             "matrix": [
                                 [
@@ -325,7 +325,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/FreeMovement", 
-                "guid": "7d6d286f-0cb7-4ab6-bee9-714e24a21f1a", 
+                "guid": "288c1e5e-f93e-43cd-bf22-179d22657bcb", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [], 
@@ -335,7 +335,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "a2d138d5-fec9-49c2-aef6-f5269bc42339", 
+                        "guid": "9657d017-45be-499c-b28b-c71839de1323", 
                         "value": {
                             "point": [
                                 0.87500000000000011, 
@@ -359,7 +359,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LinearMovement", 
-                "guid": "5bb4cfa6-8493-4299-b0ef-6b23f77f57b5", 
+                "guid": "963be442-a706-4690-b1ae-f2aafcfd8896", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [], 
@@ -369,7 +369,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "1079857d-ff5c-45b0-99af-0174a6089ad3", 
+                        "guid": "024eae39-61a3-4afc-8718-c03e4c51c2e3", 
                         "value": {
                             "point": [
                                 0.87500000000000011, 
@@ -393,7 +393,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/OpenGripper", 
-                "guid": "f5836a43-f32d-4334-8fb4-52cdb0536399", 
+                "guid": "8a9a0d9f-f8df-42e9-beb5-9b1e8fc4588b", 
                 "value": {
                     "act_n": -1, 
                     "tag": "Generic Action"
@@ -401,7 +401,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LinearMovement", 
-                "guid": "e5fe9643-e0d0-4a1e-85b4-49339dc7fd41", 
+                "guid": "6147ce02-1ca2-47fc-b4f9-d0c04bd100d0", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [], 
@@ -411,7 +411,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "36d7de23-b236-4e6e-9980-ee3a4e0957fe", 
+                        "guid": "ec9915b3-ac87-447c-a41d-d47784c6615a", 
                         "value": {
                             "point": [
                                 0.87500000000000011, 
@@ -435,7 +435,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/FreeMovement", 
-                "guid": "f8f9aa5d-df3f-40bf-9750-cb208d04b8a3", 
+                "guid": "5290712f-928b-4f6d-8c3c-3307d5f39fd4", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [], 
@@ -445,7 +445,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "2233dd04-4740-4c31-a3ee-ec75f0210f8b", 
+                        "guid": "35d1d253-3f01-4c78-b0cc-cff7d5c8b4ef", 
                         "value": {
                             "point": [
                                 0.25000000000000017, 
@@ -469,12 +469,12 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LoadWorkpiece", 
-                "guid": "c77d9160-88ca-451b-8931-637923189f96", 
+                "guid": "7ac2aa38-9e52-4b1b-9cd0-335d3a44bd8a", 
                 "value": {
                     "act_n": -1, 
                     "frame": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "0ac3f2c3-4042-4519-9c24-ccb5cdd3549c", 
+                        "guid": "3c20328a-4495-4eb3-b394-3079d290d005", 
                         "value": {
                             "point": [
                                 0.25000000000000011, 
@@ -499,12 +499,12 @@
             }, 
             {
                 "dtype": "compas_fab.planning/CloseGripper", 
-                "guid": "7cdc4ecd-474c-4f50-a494-2d1e71f352d5", 
+                "guid": "5dacebff-e70d-418d-814d-8ec35e0d7cd3", 
                 "value": {
                     "act_n": -1, 
                     "attached_workpiece_grasp": {
                         "dtype": "compas.geometry/Transformation", 
-                        "guid": "cde0b9d3-30de-46b4-bc1a-03bebc46deab", 
+                        "guid": "6fb330ca-b5cc-461b-a56b-eb428af191ca", 
                         "value": {
                             "matrix": [
                                 [
@@ -540,7 +540,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/FreeMovement", 
-                "guid": "b3d6b3cc-f866-4353-8d8b-5fcd1463c78b", 
+                "guid": "24ab8bdd-6855-4619-8e55-ce610d7a56a5", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [
@@ -559,7 +559,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "72455a2c-8de6-44eb-84a6-714c020a2d97", 
+                        "guid": "7882a204-7e9b-4d7a-bfb0-f1260a0b0692", 
                         "value": {
                             "point": [
                                 0.77500000596046437, 
@@ -583,7 +583,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LinearMovement", 
-                "guid": "0a5cce90-c9d3-4800-811f-54577b9879a0", 
+                "guid": "84d4a1e1-73b2-4baf-a201-b169e2138945", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [
@@ -602,7 +602,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "06dcfebe-0d58-4583-bb75-c38d90118b83", 
+                        "guid": "ae6f9e35-16a2-4eb7-8ade-0b2c444a7e03", 
                         "value": {
                             "point": [
                                 0.77500000596046437, 
@@ -626,7 +626,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/OpenGripper", 
-                "guid": "dcbefba9-4701-4f43-bd8b-dd7faeda5de3", 
+                "guid": "d8a70792-7837-419e-920e-8df3843e89bc", 
                 "value": {
                     "act_n": -1, 
                     "tag": "Generic Action"
@@ -634,7 +634,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LinearMovement", 
-                "guid": "a3730517-13d0-48e0-a9a2-f6f485837b96", 
+                "guid": "ba9674a4-85fa-4906-961d-e78e8093ff2d", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [
@@ -653,7 +653,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "f21f1e94-0809-4621-82e9-d9168981345c", 
+                        "guid": "ad0bf9d1-97b5-4834-b47f-812d7b223266", 
                         "value": {
                             "point": [
                                 0.77500000596046437, 
@@ -677,7 +677,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/FreeMovement", 
-                "guid": "287c4468-8289-4c33-a329-5ee23c735811", 
+                "guid": "38783f2c-3af2-4a72-9614-da54cbb04a87", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [], 
@@ -687,7 +687,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "b76861c9-c009-4eb0-bac1-4a1853d1ab58", 
+                        "guid": "c8858824-b258-455b-b58d-d91865720e4e", 
                         "value": {
                             "point": [
                                 0.25000000000000017, 
@@ -711,12 +711,12 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LoadWorkpiece", 
-                "guid": "b0e0fca3-1d85-4bc2-9850-a3c69d36f8ec", 
+                "guid": "97213a5e-fdac-4060-b937-de20a45976dd", 
                 "value": {
                     "act_n": -1, 
                     "frame": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "e8a1fb91-a906-453c-bbe0-f8b4e6d5e678", 
+                        "guid": "38569e1e-883e-40d0-a5c6-bc5cd4971e97", 
                         "value": {
                             "point": [
                                 0.25000000000000011, 
@@ -741,12 +741,12 @@
             }, 
             {
                 "dtype": "compas_fab.planning/CloseGripper", 
-                "guid": "ff9c7c7d-c9de-4a7c-b295-ca01a6d5a909", 
+                "guid": "05d8385c-e2fd-4d64-87ee-c5c7b3807b9b", 
                 "value": {
                     "act_n": -1, 
                     "attached_workpiece_grasp": {
                         "dtype": "compas.geometry/Transformation", 
-                        "guid": "cde0b9d3-30de-46b4-bc1a-03bebc46deab", 
+                        "guid": "6fb330ca-b5cc-461b-a56b-eb428af191ca", 
                         "value": {
                             "matrix": [
                                 [
@@ -782,7 +782,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/FreeMovement", 
-                "guid": "e2be8277-98d7-419d-b2a7-73b5c1fc2a6e", 
+                "guid": "7eb75bcf-3ca3-4243-8055-413f574c482c", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [
@@ -801,7 +801,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "84639a78-8cd7-4456-972a-ac52b057648f", 
+                        "guid": "e2dd328d-2ee7-4b7c-a140-d2958eb2f84a", 
                         "value": {
                             "point": [
                                 0.97500000596046488, 
@@ -825,7 +825,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LinearMovement", 
-                "guid": "b5af1633-2e52-4559-ab74-cff2d8be572b", 
+                "guid": "c2f517c4-6ab0-4687-b63f-0fe533d15b4e", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [
@@ -844,7 +844,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "99461c5b-680b-4cda-aad7-e65a7586dac2", 
+                        "guid": "5f386386-e3c1-40c4-8d55-852d2f0c8e9a", 
                         "value": {
                             "point": [
                                 0.97500000596046488, 
@@ -868,7 +868,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/OpenGripper", 
-                "guid": "fc5316ae-df6b-49aa-80c9-a5dbe5ab3629", 
+                "guid": "dd4d76b5-f73e-43c4-a0a0-382e18597ce1", 
                 "value": {
                     "act_n": -1, 
                     "tag": "Generic Action"
@@ -876,7 +876,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LinearMovement", 
-                "guid": "3907e6d9-140e-4743-aa26-9c605c3049f4", 
+                "guid": "91e55c66-9e85-427c-9a84-ab5cde1ed07f", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [
@@ -895,7 +895,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "4ba26803-a0a2-4f4c-b0b2-166cff7f9c50", 
+                        "guid": "83a381d5-9751-49fb-9334-6e3940be6e87", 
                         "value": {
                             "point": [
                                 0.97500000596046488, 
@@ -919,7 +919,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/FreeMovement", 
-                "guid": "024e6f56-f293-454d-9e9d-053352f4967d", 
+                "guid": "721741be-2394-4468-b502-59a8d1d8a2d4", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [], 
@@ -929,7 +929,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "80ceddd2-67b4-4943-b1c6-48ad8fa9b922", 
+                        "guid": "15172d2a-f3a4-4dcb-8afc-c2e88d336e53", 
                         "value": {
                             "point": [
                                 0.25000000000000017, 
@@ -953,12 +953,12 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LoadWorkpiece", 
-                "guid": "842b5ac2-a9c4-4e49-bdf8-baa131a3b55a", 
+                "guid": "1bf3acf1-0f9e-41f0-8ba9-afe34c4ce907", 
                 "value": {
                     "act_n": -1, 
                     "frame": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "fe6826fb-0380-4092-a233-ed7a123f5254", 
+                        "guid": "a60d7602-8012-49a3-a465-5fcadc0d1955", 
                         "value": {
                             "point": [
                                 0.25000000000000011, 
@@ -983,12 +983,12 @@
             }, 
             {
                 "dtype": "compas_fab.planning/CloseGripper", 
-                "guid": "d46f43b4-4426-4f76-afff-fb0dc9afb10f", 
+                "guid": "ccfadae2-a467-4e2f-ba35-52f6c7c0c194", 
                 "value": {
                     "act_n": -1, 
                     "attached_workpiece_grasp": {
                         "dtype": "compas.geometry/Transformation", 
-                        "guid": "cde0b9d3-30de-46b4-bc1a-03bebc46deab", 
+                        "guid": "6fb330ca-b5cc-461b-a56b-eb428af191ca", 
                         "value": {
                             "matrix": [
                                 [
@@ -1024,7 +1024,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/FreeMovement", 
-                "guid": "8701c155-528e-4fd0-92ab-3e5b713a2177", 
+                "guid": "b949e03c-76b2-4b43-88be-dd95db392cab", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [
@@ -1043,7 +1043,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "e79750b6-8ee5-4ba1-988f-eb5dbe299892", 
+                        "guid": "dd641aa5-53b4-48f2-9616-1e086df81c46", 
                         "value": {
                             "point": [
                                 0.87499999999999989, 
@@ -1067,7 +1067,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LinearMovement", 
-                "guid": "46a670e0-6a44-4ef2-9ee5-b319ed73f68f", 
+                "guid": "6afd2e60-65c0-4416-b575-5bfd0822301a", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [
@@ -1086,7 +1086,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "5e75f95d-dc5f-43d7-ab9e-9a96028d952f", 
+                        "guid": "e7e4faf4-330e-4efd-a24a-c216f80f9184", 
                         "value": {
                             "point": [
                                 0.87499999999999989, 
@@ -1110,7 +1110,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/OpenGripper", 
-                "guid": "d18fa6e1-dac1-4c48-bebc-cda0f5672317", 
+                "guid": "6d26331d-3bad-43bc-8484-ae246a9310a9", 
                 "value": {
                     "act_n": -1, 
                     "tag": "Generic Action"
@@ -1118,7 +1118,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LinearMovement", 
-                "guid": "bb09d0ee-7747-48dd-bc9d-1dc87a441409", 
+                "guid": "6fe8c43f-2df4-404b-8dfd-df08e05dc153", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [
@@ -1137,7 +1137,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "0573bd80-326d-470c-b50c-17c7475f9430", 
+                        "guid": "e92723d2-fb22-4b2f-b445-9ad05ba584f1", 
                         "value": {
                             "point": [
                                 0.87499999999999989, 
@@ -1161,7 +1161,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/FreeMovement", 
-                "guid": "fc19ef24-4c29-4305-9518-ea6a4fc68395", 
+                "guid": "63976e45-0db5-4a88-abbb-2f05f1d8235a", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [], 
@@ -1171,7 +1171,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "30b44154-225a-4841-a649-acdcb9898f38", 
+                        "guid": "2295999c-6faa-4e29-b374-22c12fdf7d5d", 
                         "value": {
                             "point": [
                                 0.25000000000000017, 
@@ -1195,12 +1195,12 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LoadWorkpiece", 
-                "guid": "89f855e8-b3ac-4380-90b8-c1f25eb41db5", 
+                "guid": "60a1c34c-799f-4514-9992-07858f909a26", 
                 "value": {
                     "act_n": -1, 
                     "frame": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "ccb5a95c-3149-48da-90d5-09759a503327", 
+                        "guid": "5adccf62-2c7b-4040-a6fc-5885c7b6bf33", 
                         "value": {
                             "point": [
                                 0.25000000000000011, 
@@ -1225,12 +1225,12 @@
             }, 
             {
                 "dtype": "compas_fab.planning/CloseGripper", 
-                "guid": "b590c2b6-0933-46fc-b375-876bd54a912f", 
+                "guid": "4f69014d-d3df-4c04-856f-bfab9e7be3c5", 
                 "value": {
                     "act_n": -1, 
                     "attached_workpiece_grasp": {
                         "dtype": "compas.geometry/Transformation", 
-                        "guid": "cde0b9d3-30de-46b4-bc1a-03bebc46deab", 
+                        "guid": "6fb330ca-b5cc-461b-a56b-eb428af191ca", 
                         "value": {
                             "matrix": [
                                 [
@@ -1266,7 +1266,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/FreeMovement", 
-                "guid": "eff68506-c5ac-48de-a4c9-e45a35d39a81", 
+                "guid": "3a880260-ca59-4184-8091-c0b28ad14007", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [
@@ -1281,7 +1281,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "bf4a5a57-fb49-484d-b42f-977101fb4ad6", 
+                        "guid": "5933e28c-919f-4320-8cf0-19dd80ece619", 
                         "value": {
                             "point": [
                                 0.82499999999999962, 
@@ -1305,7 +1305,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LinearMovement", 
-                "guid": "264e3320-d21b-4d23-ab2a-b8fb096c6cf7", 
+                "guid": "6ae3f31a-7061-48b7-969f-3c73398e5a0f", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [
@@ -1320,7 +1320,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "284f507b-a6d1-490f-af1e-031ab56f061a", 
+                        "guid": "1624cc18-dee4-403f-a4c5-6e0f88e291ab", 
                         "value": {
                             "point": [
                                 0.82499999999999973, 
@@ -1344,7 +1344,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/OpenGripper", 
-                "guid": "d185fce0-8014-4e69-b19e-bc5aef56ef90", 
+                "guid": "191dc15a-1674-4b56-883c-bcdad0033ea4", 
                 "value": {
                     "act_n": -1, 
                     "tag": "Generic Action"
@@ -1352,7 +1352,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LinearMovement", 
-                "guid": "80b0e871-2c2b-46ea-b0fb-36b203e53b13", 
+                "guid": "ab439ebf-8a25-4242-8957-d3ce2c7fdd40", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [
@@ -1367,7 +1367,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "26f9919e-6f65-4408-8ac8-cf4ba6aadbef", 
+                        "guid": "3319f8d8-98ef-4aa2-86ff-9a430b038c3e", 
                         "value": {
                             "point": [
                                 0.74999999999999978, 
@@ -1391,7 +1391,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/FreeMovement", 
-                "guid": "59b55f0e-16a5-414a-8fda-e94781c52053", 
+                "guid": "82fdef19-2eeb-48db-a7b9-4754149cb065", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [], 
@@ -1401,7 +1401,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "63416144-7f62-48fa-8b7c-04fab86a1ccf", 
+                        "guid": "9bec6f2c-486f-4dd0-bbab-1e9fcf06e75c", 
                         "value": {
                             "point": [
                                 0.25000000000000017, 
@@ -1425,12 +1425,12 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LoadWorkpiece", 
-                "guid": "fc44e48f-dc7c-4eb1-a13d-8e7be2d88e6c", 
+                "guid": "52af2a24-5320-4d09-9096-efdea1dfa4f0", 
                 "value": {
                     "act_n": -1, 
                     "frame": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "659be5e1-c8b2-4258-9d3b-f0444eb046a9", 
+                        "guid": "37647364-e988-4188-9d39-bd139e9c8651", 
                         "value": {
                             "point": [
                                 0.25000000000000011, 
@@ -1455,12 +1455,12 @@
             }, 
             {
                 "dtype": "compas_fab.planning/CloseGripper", 
-                "guid": "5b39afd0-0b60-427a-9ba8-013729f7cd44", 
+                "guid": "50d69b14-992d-4930-995b-d891353c1e6d", 
                 "value": {
                     "act_n": -1, 
                     "attached_workpiece_grasp": {
                         "dtype": "compas.geometry/Transformation", 
-                        "guid": "cde0b9d3-30de-46b4-bc1a-03bebc46deab", 
+                        "guid": "6fb330ca-b5cc-461b-a56b-eb428af191ca", 
                         "value": {
                             "matrix": [
                                 [
@@ -1496,7 +1496,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/FreeMovement", 
-                "guid": "30b8be6f-e030-4b1d-83ed-83b6b7dd8ca7", 
+                "guid": "1176d210-fc2c-44b2-a287-a0db42be131c", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [
@@ -1515,7 +1515,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "9f368033-75bd-4266-916b-935648c83e85", 
+                        "guid": "02903e98-5e1f-4b34-93c1-a3f902ed50cd", 
                         "value": {
                             "point": [
                                 0.87500000000000011, 
@@ -1539,7 +1539,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LinearMovement", 
-                "guid": "eb60eb84-e3a9-4420-91b7-14253840679f", 
+                "guid": "cbcf5784-83b1-4b41-863f-dbd68febcd95", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [
@@ -1558,7 +1558,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "87e38d30-8db1-439b-8d98-b6d0beadd07e", 
+                        "guid": "340c8207-fd2f-45d3-a197-960caa3a485e", 
                         "value": {
                             "point": [
                                 0.87499999999999967, 
@@ -1582,7 +1582,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/OpenGripper", 
-                "guid": "679e0140-0439-4bb8-b362-d3d7a8c12013", 
+                "guid": "d91ba905-83aa-47bf-b870-ce7a69fa9e8e", 
                 "value": {
                     "act_n": -1, 
                     "tag": "Generic Action"
@@ -1590,7 +1590,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LinearMovement", 
-                "guid": "4582a469-eb02-4ebc-a256-79daef4b6582", 
+                "guid": "8e0fa91a-792a-4814-82c5-cbbcc0627ae9", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [
@@ -1609,7 +1609,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "bb93e799-07b8-458b-bde1-558e5f63e558", 
+                        "guid": "347022dd-2fd2-4169-bc42-4e954252630d", 
                         "value": {
                             "point": [
                                 0.87499999999999967, 
@@ -1633,7 +1633,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/FreeMovement", 
-                "guid": "3372e500-014e-4323-996a-497fdccf171a", 
+                "guid": "db3c096b-c286-42be-b81c-5ed45779dfcb", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [], 
@@ -1643,7 +1643,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "2bfd4317-d1e4-4ffb-b429-71deaf104f42", 
+                        "guid": "04e22b26-d852-41c5-b2c1-d3892262f8d9", 
                         "value": {
                             "point": [
                                 0.25000000000000017, 
@@ -1667,12 +1667,12 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LoadWorkpiece", 
-                "guid": "ec65f87f-b2d2-488e-9f69-8d3ed844f18b", 
+                "guid": "d4a8e151-d658-47a0-a0e7-68f032e4a7d0", 
                 "value": {
                     "act_n": -1, 
                     "frame": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "6bad06b5-3c73-49c8-82fa-7b6e1d3f7c56", 
+                        "guid": "34ff36ff-e495-4510-95b6-1c7265c97f7d", 
                         "value": {
                             "point": [
                                 0.25000000000000011, 
@@ -1697,12 +1697,12 @@
             }, 
             {
                 "dtype": "compas_fab.planning/CloseGripper", 
-                "guid": "0cbc9fb3-ccab-4375-bd30-a08f366844d8", 
+                "guid": "ad3abf7b-6a11-464b-9318-c44a7149a8d7", 
                 "value": {
                     "act_n": -1, 
                     "attached_workpiece_grasp": {
                         "dtype": "compas.geometry/Transformation", 
-                        "guid": "cde0b9d3-30de-46b4-bc1a-03bebc46deab", 
+                        "guid": "6fb330ca-b5cc-461b-a56b-eb428af191ca", 
                         "value": {
                             "matrix": [
                                 [
@@ -1738,7 +1738,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/FreeMovement", 
-                "guid": "098a0ba9-7153-41ce-a608-d92a7521fe46", 
+                "guid": "492fc177-f279-4d85-8920-72e3e4c817f2", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [
@@ -1757,7 +1757,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "54689077-fb67-497f-aff3-29ffa5a3c5b3", 
+                        "guid": "8bea1e64-ee6b-44ce-a8e5-9c9e3670676e", 
                         "value": {
                             "point": [
                                 0.82499999999999984, 
@@ -1781,7 +1781,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LinearMovement", 
-                "guid": "faa448d4-bff0-41b0-beef-341fda8a0144", 
+                "guid": "2d3bb0a2-b876-431b-ada5-efff6aa3ddb4", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [
@@ -1800,7 +1800,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "35f8d478-1179-4dfd-b1c3-11c327dbe643", 
+                        "guid": "25675b6b-893c-496f-8124-e2a13403ee79", 
                         "value": {
                             "point": [
                                 0.82499999999999962, 
@@ -1824,7 +1824,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/OpenGripper", 
-                "guid": "ad86b489-d1c9-4c1a-bc03-cf7633d3ad0e", 
+                "guid": "72f5375d-3c57-4840-b8b0-c9f42beb61b6", 
                 "value": {
                     "act_n": -1, 
                     "tag": "Generic Action"
@@ -1832,7 +1832,7 @@
             }, 
             {
                 "dtype": "compas_fab.planning/LinearMovement", 
-                "guid": "9d0bf48a-f555-4b1b-9af8-de5c164c80f6", 
+                "guid": "fdf93784-880a-49a0-9349-b761ff33f486", 
                 "value": {
                     "act_n": -1, 
                     "allowed_collision_pairs": [
@@ -1851,7 +1851,7 @@
                     "planner_seed": null, 
                     "robot_target": {
                         "dtype": "compas.geometry/Frame", 
-                        "guid": "86a9a84b-fda6-42b6-abfa-1cc0cf66ec66", 
+                        "guid": "825e4a8d-0668-4331-a981-915f2ec0a49c", 
                         "value": {
                             "point": [
                                 0.74999999999999956, 
@@ -1884,9 +1884,60 @@
             "b6", 
             "b7"
         ], 
+        "robot_initial_configuration": {
+            "dtype": "compas.robots/Configuration", 
+            "guid": "6dfa4196-d50f-47f8-8091-42c0fe2a5e25", 
+            "value": {
+                "joint_names": [
+                    "joint_1", 
+                    "joint_2", 
+                    "joint_3", 
+                    "joint_4", 
+                    "joint_5", 
+                    "joint_6"
+                ], 
+                "joint_types": [
+                    2, 
+                    2, 
+                    2, 
+                    0, 
+                    0, 
+                    0
+                ], 
+                "joint_values": [
+                    0.0, 
+                    0.0, 
+                    0.0, 
+                    0.0, 
+                    0.0, 
+                    0.0
+                ]
+            }
+        }, 
+        "robot_initial_frame": {
+            "dtype": "compas.geometry/Frame", 
+            "guid": "e3ca8e4a-b390-4a97-a169-a8495a01649b", 
+            "value": {
+                "point": [
+                    0.57099999999999995, 
+                    0.0, 
+                    0.89900000000000002
+                ], 
+                "xaxis": [
+                    6.1230317691118863e-17, 
+                    0.0, 
+                    -1.0
+                ], 
+                "yaxis": [
+                    0.0, 
+                    1.0, 
+                    0.0
+                ]
+            }
+        }, 
         "tool": {
             "dtype": "compas_fab.robots/Tool", 
-            "guid": "d77d67fb-d936-42a5-88e1-0a3980a57fae", 
+            "guid": "04148d64-3381-4e34-8f5b-16e3dbc95b84", 
             "value": {
                 "_scale_factor": 1.0, 
                 "attr": {}, 
@@ -5218,14 +5269,186 @@
                 "name": "g1"
             }
         }, 
+        "workpiece_assembled_frame": {}, 
+        "workpiece_before_approach_frame": {}, 
+        "workpiece_storage_frame": {
+            "b0": {
+                "dtype": "compas.geometry/Frame", 
+                "guid": "4922d0a3-f94b-469e-a475-be6524dc0c08", 
+                "value": {
+                    "point": [
+                        0.0, 
+                        -1.0, 
+                        0.0
+                    ], 
+                    "xaxis": [
+                        1.0, 
+                        0.0, 
+                        0.0
+                    ], 
+                    "yaxis": [
+                        0.0, 
+                        1.0, 
+                        0.0
+                    ]
+                }
+            }, 
+            "b1": {
+                "dtype": "compas.geometry/Frame", 
+                "guid": "15aa8d23-36ee-4db0-8d37-304ffbfe8d7b", 
+                "value": {
+                    "point": [
+                        0.0, 
+                        -1.1000000000000001, 
+                        0.0
+                    ], 
+                    "xaxis": [
+                        1.0, 
+                        0.0, 
+                        0.0
+                    ], 
+                    "yaxis": [
+                        0.0, 
+                        1.0, 
+                        0.0
+                    ]
+                }
+            }, 
+            "b2": {
+                "dtype": "compas.geometry/Frame", 
+                "guid": "ed110e8b-5bf4-4162-9a4d-9d9f63df6743", 
+                "value": {
+                    "point": [
+                        0.0, 
+                        -1.2000000000000002, 
+                        0.0
+                    ], 
+                    "xaxis": [
+                        1.0, 
+                        0.0, 
+                        0.0
+                    ], 
+                    "yaxis": [
+                        0.0, 
+                        1.0, 
+                        0.0
+                    ]
+                }
+            }, 
+            "b3": {
+                "dtype": "compas.geometry/Frame", 
+                "guid": "6488ccdd-9482-4b25-8137-ee70ec322e6d", 
+                "value": {
+                    "point": [
+                        0.0, 
+                        -1.3000000000000003, 
+                        0.0
+                    ], 
+                    "xaxis": [
+                        1.0, 
+                        0.0, 
+                        0.0
+                    ], 
+                    "yaxis": [
+                        0.0, 
+                        1.0, 
+                        0.0
+                    ]
+                }
+            }, 
+            "b4": {
+                "dtype": "compas.geometry/Frame", 
+                "guid": "6f4db70e-1e3d-4e35-bfb3-d8dbfb0ade19", 
+                "value": {
+                    "point": [
+                        0.0, 
+                        -1.4000000000000004, 
+                        0.0
+                    ], 
+                    "xaxis": [
+                        1.0, 
+                        0.0, 
+                        0.0
+                    ], 
+                    "yaxis": [
+                        0.0, 
+                        1.0, 
+                        0.0
+                    ]
+                }
+            }, 
+            "b5": {
+                "dtype": "compas.geometry/Frame", 
+                "guid": "25ecc30e-28e0-46b4-9ec2-cdca39b8fb5b", 
+                "value": {
+                    "point": [
+                        0.0, 
+                        -1.5000000000000004, 
+                        0.0
+                    ], 
+                    "xaxis": [
+                        1.0, 
+                        0.0, 
+                        0.0
+                    ], 
+                    "yaxis": [
+                        0.0, 
+                        1.0, 
+                        0.0
+                    ]
+                }
+            }, 
+            "b6": {
+                "dtype": "compas.geometry/Frame", 
+                "guid": "a116e020-87e6-4907-834a-4f716181552b", 
+                "value": {
+                    "point": [
+                        0.0, 
+                        -1.6000000000000005, 
+                        0.0
+                    ], 
+                    "xaxis": [
+                        1.0, 
+                        0.0, 
+                        0.0
+                    ], 
+                    "yaxis": [
+                        0.0, 
+                        1.0, 
+                        0.0
+                    ]
+                }
+            }, 
+            "b7": {
+                "dtype": "compas.geometry/Frame", 
+                "guid": "c3c146ff-db86-4d74-a282-7e82a793f266", 
+                "value": {
+                    "point": [
+                        0.0, 
+                        -1.7000000000000006, 
+                        0.0
+                    ], 
+                    "xaxis": [
+                        1.0, 
+                        0.0, 
+                        0.0
+                    ], 
+                    "yaxis": [
+                        0.0, 
+                        1.0, 
+                        0.0
+                    ]
+                }
+            }
+        }, 
         "workpieces": {
             "b0": {
                 "dtype": "compas_fab.planning/Workpiece", 
-                "guid": "5585e27b-23fe-4857-b41d-088b675ec6fd", 
+                "guid": "1f3c76ec-513b-48c5-a227-574b9716a712", 
                 "value": {
                     "grasp": {
                         "dtype": "compas.geometry/Transformation", 
-                        "guid": "6d0cf280-e538-4e72-8a55-66f843e8f025", 
+                        "guid": "ec386b44-0230-4963-800b-73b159932c70", 
                         "value": {
                             "matrix": [
                                 [
@@ -5258,7 +5481,7 @@
                     "mesh": [
                         {
                             "dtype": "compas.datastructures/Mesh", 
-                            "guid": "2bc84e33-721c-4ae5-a0b0-b03d52745f02", 
+                            "guid": "d3e0a228-a626-4a9a-b047-56bca3c560b1", 
                             "value": {
                                 "attributes": {
                                     "name": null
@@ -9212,11 +9435,11 @@
             }, 
             "b1": {
                 "dtype": "compas_fab.planning/Workpiece", 
-                "guid": "01dbf4c0-f895-45e5-9144-d0da528c6fe3", 
+                "guid": "d7cf5228-619c-4c18-bb2b-8eda25fd416f", 
                 "value": {
                     "grasp": {
                         "dtype": "compas.geometry/Transformation", 
-                        "guid": "bc998bf4-2e58-46df-a234-55e40f2369d7", 
+                        "guid": "e262c0f8-22af-4676-88cd-b231f9590845", 
                         "value": {
                             "matrix": [
                                 [
@@ -9249,7 +9472,7 @@
                     "mesh": [
                         {
                             "dtype": "compas.datastructures/Mesh", 
-                            "guid": "63478eef-4a7b-4693-8e8f-ff47c1155a7c", 
+                            "guid": "fd2e1d70-9cb7-4e56-a092-87a3b88593cf", 
                             "value": {
                                 "attributes": {
                                     "name": null
@@ -13203,11 +13426,11 @@
             }, 
             "b2": {
                 "dtype": "compas_fab.planning/Workpiece", 
-                "guid": "7f20594a-a304-4aef-9c5e-4d27597f5c59", 
+                "guid": "e8292d72-7b80-4903-8782-24efb803f19a", 
                 "value": {
                     "grasp": {
                         "dtype": "compas.geometry/Transformation", 
-                        "guid": "00df23d9-0033-442a-8e8d-a9ed75cdf879", 
+                        "guid": "d8c48b05-cfe0-4a15-a36b-1347e0cbe946", 
                         "value": {
                             "matrix": [
                                 [
@@ -13240,7 +13463,7 @@
                     "mesh": [
                         {
                             "dtype": "compas.datastructures/Mesh", 
-                            "guid": "93745e99-d651-4288-aced-4d5a832c1283", 
+                            "guid": "11932390-cb8d-4276-b92e-8a066c83c045", 
                             "value": {
                                 "attributes": {
                                     "name": null
@@ -20342,11 +20565,11 @@
             }, 
             "b3": {
                 "dtype": "compas_fab.planning/Workpiece", 
-                "guid": "802416bb-64ec-4d72-8650-f20b1c8f39e0", 
+                "guid": "c3671254-6dd9-4450-94b0-7ad52fd09e6c", 
                 "value": {
                     "grasp": {
                         "dtype": "compas.geometry/Transformation", 
-                        "guid": "9d4789cf-2119-4b35-bd0e-1949eedcf380", 
+                        "guid": "ee5745c0-fa5f-4904-9959-0ef05716c2ef", 
                         "value": {
                             "matrix": [
                                 [
@@ -20379,7 +20602,7 @@
                     "mesh": [
                         {
                             "dtype": "compas.datastructures/Mesh", 
-                            "guid": "f3ce2486-1f80-4bff-83f7-a11789c529ec", 
+                            "guid": "46992994-0cd4-469b-9b1d-7e107787f7f0", 
                             "value": {
                                 "attributes": {
                                     "name": null
@@ -27481,11 +27704,11 @@
             }, 
             "b4": {
                 "dtype": "compas_fab.planning/Workpiece", 
-                "guid": "72c8eb5a-3fee-4cfc-a889-edb697d46ca3", 
+                "guid": "d3cf65b0-17ac-426c-aafa-84f8c8379e24", 
                 "value": {
                     "grasp": {
                         "dtype": "compas.geometry/Transformation", 
-                        "guid": "c2dce41d-b7a9-4efd-8be9-c45fbd87446d", 
+                        "guid": "42b7caa3-38df-40ac-a78b-8ddf2da272fe", 
                         "value": {
                             "matrix": [
                                 [
@@ -27518,7 +27741,7 @@
                     "mesh": [
                         {
                             "dtype": "compas.datastructures/Mesh", 
-                            "guid": "d874a301-937f-484d-9072-75c84cd8ab0c", 
+                            "guid": "09dc18dc-269e-40ae-83da-295133b59697", 
                             "value": {
                                 "attributes": {
                                     "name": null
@@ -31472,11 +31695,11 @@
             }, 
             "b5": {
                 "dtype": "compas_fab.planning/Workpiece", 
-                "guid": "678fa00d-31d8-4939-a469-ce3ca5a0d6fc", 
+                "guid": "bc70cbae-b1c7-4bd9-b50d-d5fa24fadc4f", 
                 "value": {
                     "grasp": {
                         "dtype": "compas.geometry/Transformation", 
-                        "guid": "db8c9d24-78eb-4717-ae01-3cc4e591b614", 
+                        "guid": "d25fae2c-50dc-4f40-84d8-9b2715e41420", 
                         "value": {
                             "matrix": [
                                 [
@@ -31509,7 +31732,7 @@
                     "mesh": [
                         {
                             "dtype": "compas.datastructures/Mesh", 
-                            "guid": "2352eb80-57b5-46c9-866d-58dbd8e6b133", 
+                            "guid": "a1887cc8-4d0a-48c6-a910-4cc685e27209", 
                             "value": {
                                 "attributes": {
                                     "name": null
@@ -38319,11 +38542,11 @@
             }, 
             "b6": {
                 "dtype": "compas_fab.planning/Workpiece", 
-                "guid": "1639cce2-d892-4160-8cd2-65bad6ee0e85", 
+                "guid": "de58cf48-c899-4305-9d9e-745c6d1fee98", 
                 "value": {
                     "grasp": {
                         "dtype": "compas.geometry/Transformation", 
-                        "guid": "0a410689-951d-4b70-9f20-e093b09582d3", 
+                        "guid": "8f6b2d4c-83ca-4617-a2f2-c0375f03d995", 
                         "value": {
                             "matrix": [
                                 [
@@ -38356,7 +38579,7 @@
                     "mesh": [
                         {
                             "dtype": "compas.datastructures/Mesh", 
-                            "guid": "dfdf8c53-f4d6-41db-b209-26cd67e29951", 
+                            "guid": "d1d487fe-63f6-494c-8fb0-8869eb39824b", 
                             "value": {
                                 "attributes": {
                                     "name": null
@@ -45166,11 +45389,11 @@
             }, 
             "b7": {
                 "dtype": "compas_fab.planning/Workpiece", 
-                "guid": "74f7f09b-ea1d-443c-91e0-3452ebed58a3", 
+                "guid": "b22d31d2-00f1-4a6d-ae8c-be5b1e764b21", 
                 "value": {
                     "grasp": {
                         "dtype": "compas.geometry/Transformation", 
-                        "guid": "cfd94cd9-fd28-4765-9442-cb35784f02d2", 
+                        "guid": "c8d422eb-731b-47a8-9e7f-6d1e2a9ae25c", 
                         "value": {
                             "matrix": [
                                 [
@@ -45203,7 +45426,7 @@
                     "mesh": [
                         {
                             "dtype": "compas.datastructures/Mesh", 
-                            "guid": "d5349ec1-1367-4d76-b859-67eff71575f8", 
+                            "guid": "5891db68-c34b-487f-8860-7ee011b1c597", 
                             "value": {
                                 "attributes": {
                                     "name": null
