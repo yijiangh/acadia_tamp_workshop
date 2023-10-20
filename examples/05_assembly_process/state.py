@@ -1,7 +1,7 @@
 import json
 import os
 
-from compas.data import DataDecoder, json_dumps
+from compas.data import DataDecoder
 from compas.robots import RobotModel
 
 from compas_fab.planning import AssemblyProcess, SceneState, ToolState, WorkpieceState, RobotState
@@ -15,7 +15,10 @@ HERE = os.path.dirname(__file__)
 TOOL_EXPORT_DIR = os.path.join(HERE)
 ROBOT_MODEL_DIR = os.path.join(HERE, '..', '..', 'robots')
 
-def load_robot(client: PyChoreoClient, robot_name: str):
+def load_robot(client: PyChoreoClient, robot_name: str) -> Robot:
+    """Load robot URDF and SRDF from the robot model directory.
+    Pass them to the PyChoreoClient
+    """
     if robot_name == 'abb_crb15000':
         urdf_filename = os.path.join(ROBOT_MODEL_DIR, 'abb_crb15000_support', "urdf", "crb15000_5_95.urdf")
         srdf_filename = os.path.join(ROBOT_MODEL_DIR, 'abb_crb15000_support', "srdf", "crb15000_5_95.srdf")
@@ -28,7 +31,8 @@ def load_robot(client: PyChoreoClient, robot_name: str):
 
     return robot
 
-def initialize_process_scene_state(client: PyChoreoClient, process: AssemblyProcess, options=None):
+def initialize_process_scene_state(client: PyChoreoClient, process: AssemblyProcess, options=None) -> None:
+    """Initialize the scene state of the process."""
     options = options or {}
     debug = options.get('debug', False)
 
@@ -51,6 +55,9 @@ def initialize_process_scene_state(client: PyChoreoClient, process: AssemblyProc
             client.add_tool_from_urdf(process.tool_id, process.tool.urdf_file_path(TOOL_EXPORT_DIR))
 
 def set_state(client: PyChoreoClient, robot: RobotModel, state: SceneState, options=None):
+    """Set the SceneState (state of all objects) to the planner.
+
+    """
     options = options or {}
     debug = options.get('debug', False)
     tool0_link_name = robot.get_end_effector_link_name()
@@ -105,27 +112,24 @@ def set_state(client: PyChoreoClient, robot: RobotModel, state: SceneState, opti
 
 def main():
     # Load Process File from JSON
-
     with open(os.path.join(HERE, 'process.json'), 'r') as f:
         assembly_process = json.load(f, cls=DataDecoder) #type: AssemblyProcess
 
-    # Print Initial State
-    initial_state = assembly_process.get_initial_state()
-
+    # Initialize PyChoreoClient
     with PyChoreoClient(viewer=True) as client:
         initialize_process_scene_state(client, assembly_process)
         robot = load_robot(client, 'abb_crb15000')
-        set_state(client, robot, initial_state)
-        # pp.wait_if_gui('Initial State')
 
-        for i in range(len(assembly_process.actions)):
+        # Set Initial State
+        initial_state = assembly_process.get_initial_state()
+        set_state(client, robot, initial_state)
+        pp.wait_if_gui(f'Initial State') # Wait for user to press Enter in console
+
+        # Set Subsequent states
+        for i in range(1, len(assembly_process.actions)):
             state = assembly_process.get_intermediate_state(i)
             set_state(client, robot, state)
-            pp.wait_if_gui(f'State {i}')
-
-        # last_state = assembly_process.get_intermediate_state(len(assembly_process.actions), debug=True)
-        # set_state(client, robot, last_state)
-        # pp.wait_if_gui(f'Last State')
+            pp.wait_if_gui(f'State {i}') # Wait for user to press Enter in console
 
 if __name__ == '__main__':
     main()

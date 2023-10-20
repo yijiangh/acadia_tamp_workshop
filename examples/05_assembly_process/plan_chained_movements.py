@@ -21,11 +21,11 @@ PLANNING_SCOPE = [
     'ALL',
 ]
 
-planning_scope = 'ALL_FMG'
+planning_scope = 'ALL'
 
 # For ``SINGLE_LMG`` and ``SINGLE_FMG`` scopes, specify the index of the movement group to plan.
 # The index refers to the index among all actions in process, as in process.actions[single_group_action_index].
-single_group_action_index = 46
+single_group_action_index = 14
 
 # For ``INDIVIDUAL_MOVEMENTS`` scope, specify the indices of the movement to plan.
 individual_movement_indices = [3,4,6,7]
@@ -92,14 +92,25 @@ if planning_scope in ['SINGLE_LMG', 'ALL_LMG', 'ALL']:
     print("Planning Linear Movement Groups")
     for group in staged_lmgs:
         print("- Planning Linear Movement Group")
+        success = False
         for action in group:
             action_index = process.actions.index(action)
             scene_state = process.get_intermediate_state(action_index)
             start_configuration = process.get_action_starting_configuration(action)
             end_configuration = process.get_action_ending_configuration(action)
-            # action.plan(start_configuration, end_configuration, scene_state)
+
             print("- - Planning (index={}) LinearMovement from {} to {}".format(action_index,
+            # trajectory = action.plan(start_configuration, end_configuration, scene_state)
+            # success = trajectory is not None
+            # if not success:
+            #     break
+            # action.planned_trajectory = trajectory
                 start_configuration, end_configuration))
+        # Clean the partially successful planning
+        # if not success:
+        #     print("- - Failed to plan Linear Movement Group")
+        #     for action in group:
+        #         action.planned_trajectory = None
     print ("Done Planning LMGs  \n\n")
 
 if planning_scope in ['SINGLE_FMG', 'ALL_FMG', 'ALL']:
@@ -113,8 +124,17 @@ if planning_scope in ['SINGLE_FMG', 'ALL_FMG', 'ALL']:
             end_configuration = process.get_action_ending_configuration(action)
             # action.plan(start_configuration, end_configuration, scene_state)
             print("- - Planning (index={}) FreeMovement from {} to {}".format(action_index,
+            # trajectory = action.plan(start_configuration, end_configuration, scene_state)
+            # success = trajectory is not None
+            # if not success:
+            #     break
+            # action.planned_trajectory = trajectory
                 start_configuration, end_configuration))
-    print ("Done Planning FMGs  \n\n")
+        # Clean the partially successful planning
+        # if not success:
+        #     print("- - Failed to plan Linear Movement Group")
+        #     for action in group:
+        #         action.planned_trajectory = None    print ("Done Planning FMGs  \n\n")
 
 if planning_scope in ['INDIVIDUAL_MOVEMENTS']:
     print("Planning Individual Movements")
@@ -128,3 +148,6 @@ if planning_scope in ['INDIVIDUAL_MOVEMENTS']:
             action.__class__.__name__, start_configuration, end_configuration))
     print ("Done Planning Individual Movements \n\n")
 
+
+# Save the process to a JSON file.
+# This will overwrite the original process file.
