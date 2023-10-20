@@ -28,6 +28,7 @@ with PyChoreoClient(viewer=False) as client:
 
     options = {
         'diagnosis': True,
+        'solve_timeout': 20.0, # This does not work yet
     }
 
     goal_constraint = robot.constraints_from_configuration(end_conf, [0.01], [0.01])
@@ -37,4 +38,5 @@ with PyChoreoClient(viewer=False) as client:
         print("Found a trajectory!")
         with open(os.path.join(HERE, 'free_motion_result.json'), 'w') as f:
             json.dump(trajectory, f, cls=DataEncoder, indent=4, sort_keys=True)
-
+    else:
+        print("Failed to find a trajectory!")
