@@ -1,8 +1,10 @@
 import os
 import json
 import logging
+from tracemalloc import start
 import pybullet_planning as pp
 from termcolor import colored, cprint
+from typing import List, Tuple
 
 from compas.robots import RobotModel
 from compas.data import DataDecoder, DataEncoder, json_dumps
@@ -15,7 +17,7 @@ from compas_fab_pychoreo.client import PyChoreoClient
 from compas_fab_pychoreo.conversions import pose_from_frame
 
 from state import initialize_process_scene_state, load_robot, set_state
-from utils import LOGGER
+from utils import LOGGER, get_tolerances
 
 def get_ik_generator(client: PyChoreoClient, robot: RobotModel, group=None, max_attempts=50, options=None):
     options = options or {}
@@ -45,7 +47,7 @@ def get_ik_generator(client: PyChoreoClient, robot: RobotModel, group=None, max_
 def plan_free_movement(client, 
                        robot, 
                        state: SceneState, 
-                       movement: FreeMovement, 
+                       allowed_collision_pairs: List[Tuple[str, str]], 
                        start_conf=None, end_conf=None, 
                        start_frame=None, end_frame=None,
                        group=None, options=None):
@@ -53,13 +55,17 @@ def plan_free_movement(client,
     max_attempts = 100
 
     if start_conf is not None:
-        start_ik_generator = lambda frame: [start_conf]
+        def _start_ik_generator(frame):
+            yield start_conf
+        start_ik_generator = _start_ik_generator
     else:
         start_ik_generator = get_ik_generator(client, robot, group, max_attempts)
         assert start_frame is not None
 
     if end_conf is not None:
-        end_ik_generator = lambda frame: [end_conf]
+        def _end_ik_generator(frame):
+            yield end_conf
+        end_ik_generator = _end_ik_generator
     else:
         end_ik_generator = get_ik_generator(client, robot, group, max_attempts)
         assert end_frame is not None
@@ -77,7 +83,7 @@ def plan_free_movement(client,
                     client.extra_disabled_collision_links[acm_name].add(
                             ((client._get_bodies(wp_id)[0], None), (client._get_bodies(tool_id)[0], None))
                             )
-    # TODO movement acm
+    # TODO allowed_collision_pairs
 
     trajectory = None
     for start_conf in start_ik_generator(start_frame):
@@ -147,40 +153,42 @@ def main():
     viewer = 0
     write = 1
     debug = 1
+    diagnosis = 0
 
     logging_level = logging.DEBUG if debug else logging.INFO
     LOGGER.setLevel(logging_level)
 
     options = {
-        'debug': debug
+        'debug': debug,
+        'diagnosis': diagnosis
         }
 
     with PyChoreoClient(viewer=viewer) as client:
         initialize_process_scene_state(client, assembly_process)
         robot = load_robot(client, 'abb_crb15000')
+        options.update(get_tolerances(robot, super_res=True))
+
         set_state(client, robot, assembly_process.get_initial_state(), options)
         # pp.wait_if_gui('Initial State')
 
-        # actions = assembly_process.get_robotic_actions()
         # actions = assembly_process.actions
         # if True:
-        #     action_index = 10
-        #     movement = actions[action_index]
+        #     action_index = 52
+        #     action = actions[action_index]
 
-        for movement in assembly_process.get_robotic_actions():
-            if isinstance(movement, FreeMovement):
-                action_index = assembly_process.actions.index(movement)
+        for action in assembly_process.get_robotic_actions():
+            trajectory = None
+            if isinstance(action, FreeMovement):
+                action_index = assembly_process.actions.index(action)
                 LOGGER.debug(colored('Planning Free Movement {}'.format(action_index), 'cyan'))
 
                 state = assembly_process.get_intermediate_state(action_index)
 
-                # TODO state propagation has some bugs, all states have the same configuration from the initial state now
-                # start_conf = state.robot_state.configuration
-                start_conf = None
+                start_conf = assembly_process.get_action_starting_configuration(action)
                 start_frame = state.robot_state.frame
 
-                end_conf = movement.fixed_configuration
-                end_frame = movement.robot_target
+                end_conf = assembly_process.get_action_ending_configuration(action)
+                end_frame = action.robot_target
 
                 if debug and viewer:
                     pp.draw_pose(pose_from_frame(start_frame), length=0.1)
@@ -189,23 +197,24 @@ def main():
                     pp.add_text('End', end_frame.point, color=(1,0,0))
 
                 trajectory = plan_free_movement(client, robot, 
-                                                state, movement, 
+                                                state, action, 
                                                 start_conf, end_conf, 
                                                 start_frame, end_frame,
                                                 group=None, options=options)
-                if trajectory is not None:
-                    LOGGER.debug(colored('Trajectory found for movement {}'.format(action_index), 'green'))
-                    movement.planned_trajectory = trajectory
 
-                    # replay for debugging
-                    if debug and viewer:
-                        set_state(client, robot, state, options)
-                        for conf in trajectory.points:
-                            client.set_robot_configuration(robot, conf)
-                            pp.wait_if_gui('Step traj')
-                else:
-                    LOGGER.debug(colored('Trajectory NOT found for movement {}'.format(action_index), 'red'))
-                    # raise ValueError("Trajectory not found")
+            if trajectory is not None:
+                LOGGER.debug(colored('Trajectory found for movement {}'.format(action_index), 'green'))
+                action.planned_trajectory = trajectory
+
+                # replay for debugging
+                if debug and viewer:
+                    set_state(client, robot, state, options)
+                    for conf in trajectory.points:
+                        client.set_robot_configuration(robot, conf)
+                        pp.wait_if_gui('Step traj')
+            else:
+                LOGGER.debug(colored('Trajectory NOT found for movement {}'.format(action_index), 'red'))
+                # raise ValueError("Trajectory not found")
 
     if write:
         with open(os.path.join(HERE, 'process.json'), 'w') as f:
