@@ -2,7 +2,7 @@
     "collision_meshes": [
         {
             "dtype": "compas.datastructures/Mesh", 
-            "guid": "2e1724f8-ee79-40b1-90a6-6b7cd00c71e4", 
+            "guid": "4b1be479-58e0-498f-ac07-63192a038530", 
             "value": {
                 "attributes": {
                     "name": null
@@ -219,7 +219,7 @@
         }, 
         {
             "dtype": "compas.datastructures/Mesh", 
-            "guid": "1c1aa9fc-ff92-45be-8678-b9087600e2ad", 
+            "guid": "61ff1bc3-acad-4ad0-aabd-dc7340c5af99", 
             "value": {
                 "attributes": {
                     "name": null
@@ -436,7 +436,7 @@
         }, 
         {
             "dtype": "compas.datastructures/Mesh", 
-            "guid": "2edcde29-f637-4c3a-a22a-1ead5fddc47d", 
+            "guid": "d81c105b-8257-4363-909d-2d39688004d7", 
             "value": {
                 "attributes": {
                     "name": null
@@ -653,7 +653,7 @@
         }, 
         {
             "dtype": "compas.datastructures/Mesh", 
-            "guid": "e310030a-7312-45ad-8b38-8df512d882f2", 
+            "guid": "380f49ce-fa9e-4b34-928a-e35aea5f372a", 
             "value": {
                 "attributes": {
                     "name": null
@@ -870,7 +870,7 @@
         }, 
         {
             "dtype": "compas.datastructures/Mesh", 
-            "guid": "cadf1c49-bece-441f-aece-a9762ad30e56", 
+            "guid": "53222c9a-b085-4c54-a823-3eb1879e2286", 
             "value": {
                 "attributes": {
                     "name": null
@@ -1086,9 +1086,39 @@
             }
         }
     ], 
-    "end_configuratoion": {
+    "end_configuration": {
         "dtype": "compas.robots/Configuration", 
-        "guid": "5ce6df01-5c55-403e-8148-fd19e3bde168", 
+        "guid": "cf99fa82-9f3f-4626-a8f4-00e11e704063", 
+        "value": {
+            "joint_names": [
+                "joint_1", 
+                "joint_2", 
+                "joint_3", 
+                "joint_4", 
+                "joint_5", 
+                "joint_6"
+            ], 
+            "joint_types": [
+                2, 
+                2, 
+                2, 
+                0, 
+                0, 
+                0
+            ], 
+            "joint_values": [
+                -0.59341194567807209, 
+                0.71558499331767511, 
+                -0.20943951023931956, 
+                0.0, 
+                0.0, 
+                0.0
+            ]
+        }
+    }, 
+    "start_configuration": {
+        "dtype": "compas.robots/Configuration", 
+        "guid": "44adc384-205b-4ab4-ba0c-4135ef18c784", 
         "value": {
             "joint_names": [
                 "joint_1", 
@@ -1108,36 +1138,6 @@
             ], 
             "joint_values": [
                 0.43633231299858238, 
-                0.71558499331767511, 
-                0.0, 
-                0.0, 
-                0.0, 
-                0.0
-            ]
-        }
-    }, 
-    "start_configuration": {
-        "dtype": "compas.robots/Configuration", 
-        "guid": "21ac6436-8c0c-4eb3-96e0-56ab64d3d997", 
-        "value": {
-            "joint_names": [
-                "joint_1", 
-                "joint_2", 
-                "joint_3", 
-                "joint_4", 
-                "joint_5", 
-                "joint_6"
-            ], 
-            "joint_types": [
-                2, 
-                2, 
-                2, 
-                0, 
-                0, 
-                0
-            ], 
-            "joint_values": [
-                -0.76794487087750496, 
                 0.71558499331767511, 
                 0.0, 
                 0.0, 
