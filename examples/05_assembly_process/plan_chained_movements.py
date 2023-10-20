@@ -34,7 +34,7 @@ individual_movement_indices = [3,4,6,7]
 # If these movements have already been planned, their old trajectory will be overwritten.
 # The old trajectory will be removed even if the new planning fails.
 
-process = load_process()
+process = load_process() # type: AssemblyProcess
 
 staged_actions = []  # type: List[RoboticMovement]
 staged_lmgs = []     # type: List[List[LinearMovement]]
@@ -148,6 +148,9 @@ if planning_scope in ['INDIVIDUAL_MOVEMENTS']:
             action.__class__.__name__, start_configuration, end_configuration))
     print ("Done Planning Individual Movements \n\n")
 
-
 # Save the process to a JSON file.
 # This will overwrite the original process file.
+# from compas.utilities import DataDecoder, DataEncoder
+# import json
+# with open(json_path, 'w') as f:
+#     json.dump(object, f, cls=DataEncoder, indent=4, sort_keys=True)
