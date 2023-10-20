@@ -1,0 +1,6 @@
+  !Move back to Initial Config at the end
+  MoveAbsJ TGofa_InitialConfig,speeddata0,FinePoint,tool0;
+  TPWrite "Program Execution Complete";
+EndProc
+
+EndModule

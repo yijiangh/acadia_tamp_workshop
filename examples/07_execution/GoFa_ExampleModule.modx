@@ -1,0 +1,51 @@
+Module ACADIA_WORKSHOP_00_TEST
+!Declarations
+
+!jointtarget
+VAR jointtarget TGofa_InitialConfig:=[[0,0,0,0,90,0],[9E9,9E9,9E9,9E9,9E9,9E9]];
+
+!robtarget (Not Used for MoveAbsJ)
+!VAR robtarget TGofa_0_End:=[[365,77.458,68.392],[0.707107,0,0,0.707107],[-1,0,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];
+
+!speeddata (mm/s for the TCP, degrees/s for reorientation of the tool, mm/s for linear external axes, degrees/s for rotating external axes)
+VAR speeddata speeddata0:=[200,80,5000,1000];
+
+!tooldata (Not Used)
+!PERS tooldata PonGoFa:=[True,[[-36.666,0.002,138.175],[0,0.92388,0,0.382683]],[0.001,[0,0,0.1],[1,0,0,0],0,0,0]];
+
+!wobjdata (Not Used for MoveAbsJ)
+!PERS wobjdata Root:=[False,True,"",[[0,0,0],[1,0,0,0]],[[0,0,0],[1,0,0,0]]];
+
+!zonedata (Blend)
+VAR zonedata DefaultBlend:=[False,1,0.1,1,0.1,1,0.1];
+VAR zonedata FinePoint:=[True,1,0.1,1,0.1,1,0.1];
+
+Proc Main()
+  AssemblyProcess;
+EndProc
+
+Proc AssemblyProcess()
+  !Path Acceleration Limitation, units is m/s2, syntax: PathAccLim AccLim [\AccMax] DecelLim [\DecelMax]
+  PathAccLim TRUE\AccMax:=10,TRUE\DecelMax:=10;
+
+  !Move Absolute Joint MoveAbsJ [\Conc] ToJointPos [\ID] [\NoEOffs] Speed [\V] | [\T] Zone [\Z] [\Inpos] Tool [\WObj]
+  !Move to Initial Config
+  MoveAbsJ TGofa_InitialConfig,speeddata0,FinePoint,tool0;
+
+  MoveAbsJ [[5,5,0,0,90,0],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-5,-5,-5,0,90,0],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[0,0,0,0,90,0],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,FinePoint,tool0;
+  TPWrite "Close Gripper. Press Play to continue.";
+  Stop;
+
+  MoveAbsJ [[5,5,0,0,90,0],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-5,-5,-5,0,90,0],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  TPWrite "Open Gripper. Press Play to continue.";
+  Stop;
+
+  !Move back to Initial Config at the end
+  MoveAbsJ TGofa_InitialConfig,speeddata0,FinePoint,tool0;
+  TPWrite "Program Execution Complete";
+EndProc
+
+EndModule
