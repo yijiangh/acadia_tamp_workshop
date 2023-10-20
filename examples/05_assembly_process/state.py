@@ -8,6 +8,7 @@ from compas_fab.planning import AssemblyProcess, SceneState, ToolState, Workpiec
 from compas_fab_pychoreo.client import PyChoreoClient
 from compas_fab.robots import AttachedCollisionMesh, Configuration, CollisionMesh, Robot
 from compas_fab.robots import RobotSemantics
+from compas.geometry import Transformation, Frame
 
 import pybullet_planning as pp
 
@@ -69,7 +70,8 @@ def set_state(client: PyChoreoClient, robot: RobotModel, state: SceneState, opti
 
         if isinstance(object_state, ToolState):
             is_attached_to_robot = object_state.attached_to_robot
-            grasp_transformation = object_state.attached_to_robot_grasp
+            # grasp_transformation = object_state.attached_to_robot_grasp
+            grasp_transformation = Transformation.from_frame(Frame.worldXY())
         elif isinstance(object_state, WorkpieceState):
             is_attached_to_robot = object_state.attached_to_tool_id is not None
             grasp_transformation = object_state.attached_to_tool_grasp
@@ -80,7 +82,7 @@ def set_state(client: PyChoreoClient, robot: RobotModel, state: SceneState, opti
             if status != 'attached_object':
                 # update only if the object is not already attached to the robot
                 client.add_attached_collision_mesh(
-                    AttachedCollisionMesh(CollisionMesh(None, tool_id),
+                    AttachedCollisionMesh(CollisionMesh(None, object_id),
                                           tool0_link_name, touch_links=touch_links),
                     options={'robot': robot,
                             #  'attached_child_link_name': tool_attach_link_Name,
@@ -89,14 +91,12 @@ def set_state(client: PyChoreoClient, robot: RobotModel, state: SceneState, opti
         else:
             # if the current status in the client is not attached, detach it
             if status == 'attached_object':
-                client.detach_attached_collision_mesh(tool_id)
+                client.detach_attached_collision_mesh(object_id)
 
     with pp.LockRenderer(not debug):
-        # * Robot
-        if state.robot_state.configuration:
-            client.set_robot_configuration(robot, state.robot_state.configuration)
-
         # * Tools
+        # ! Hard-coded touch_links here to avoid collision between tool and robot link_6
+        # This is needed because the tool is attached to the tool0, which is not immediately adjacent to link_6, even though there is no "real" link with collision geometry between them.
         for tool_id, tool_state in state.tool_states.items():
             client.set_object_frame(tool_id, tool_state.frame)
             if tool_state.configuration:
@@ -107,6 +107,10 @@ def set_state(client: PyChoreoClient, robot: RobotModel, state: SceneState, opti
         for wp_id, wp_state in state.workpiece_states.items():
             client.set_object_frame(wp_id, wp_state.frame)
             update_attached_state(wp_id, wp_state)
+
+        # * Robot
+        if state.robot_state.configuration:
+            client.set_robot_configuration(robot, state.robot_state.configuration)
 
 #####################
 
