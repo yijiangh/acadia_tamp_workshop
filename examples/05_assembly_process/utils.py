@@ -26,7 +26,7 @@ def get_logger(name):
 
     return logger
 
-LOGGER = get_logger('robarch_pddl')
+LOGGER = get_logger('acadia_tamp_workshop')
 
 #######################
 
@@ -61,6 +61,7 @@ def get_tolerances(robot: RobotModel, group=None, super_res=False):
         # 'joint_custom_limits' : get_gantry_robot_custom_limits(MAIN_ROBOT_ID),
         # the collision is counted when penetration distance is bigger than this value
         'collision_distance_threshold' : 0.0012, # in meter,
+        'max_step': 0.01,  # interpolation step size for LMP, in meter
     }
     return tolerances
 

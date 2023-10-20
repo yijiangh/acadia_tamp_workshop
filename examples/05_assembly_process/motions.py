@@ -10,7 +10,7 @@ from compas.robots import RobotModel
 from compas.data import DataDecoder, DataEncoder, json_dumps
 
 from compas_fab.robots import Configuration
-from compas_fab.planning.action import FreeMovement, LinearMovement
+from compas_fab.planning.action import FreeMovement, LinearMovement, RoboticMovement
 from compas_fab.planning import AssemblyProcess, SceneState, ToolState, WorkpieceState, RobotState
 
 from compas_fab_pychoreo.client import PyChoreoClient
@@ -47,19 +47,21 @@ def get_ik_generator(client: PyChoreoClient, robot: RobotModel, group=None, max_
 def plan_free_movement(client, 
                        robot, 
                        state: SceneState, 
-                       allowed_collision_pairs: List[Tuple[str, str]], 
+                       allowed_collision_pairs: List[Tuple[str, str]]=None, 
                        start_conf=None, end_conf=None, 
                        start_frame=None, end_frame=None,
-                       group=None, options=None):
+                       group=None,
+                       max_ik_attempts=100,
+                       options=None):
     options = options or {}
-    max_attempts = 100
+    allowed_collision_pairs = allowed_collision_pairs or []
 
     if start_conf is not None:
         def _start_ik_generator(frame):
             yield start_conf
         start_ik_generator = _start_ik_generator
     else:
-        start_ik_generator = get_ik_generator(client, robot, group, max_attempts)
+        start_ik_generator = get_ik_generator(client, robot, group, max_ik_attempts)
         assert start_frame is not None
 
     if end_conf is not None:
@@ -67,15 +69,14 @@ def plan_free_movement(client,
             yield end_conf
         end_ik_generator = _end_ik_generator
     else:
-        end_ik_generator = get_ik_generator(client, robot, group, max_attempts)
+        end_ik_generator = get_ik_generator(client, robot, group, max_ik_attempts)
         assert end_frame is not None
 
     set_state(client, robot, state, options)
 
     # ? should ACM be part of set_state?
     acm_name = '_fmp_acm'
-    # TODO this ACM should be handled by the Process
-    # Hardcoded ACM between the workpiece and the tool
+    # ACM between the workpiece and the tool
     for wp_id, wp_state in state.workpiece_states.items():
         if wp_state.attached_to_tool_id is not None:
             for tool_id, tool_state in state.tool_states.items():
@@ -83,7 +84,11 @@ def plan_free_movement(client,
                     client.extra_disabled_collision_links[acm_name].add(
                             ((client._get_bodies(wp_id)[0], None), (client._get_bodies(tool_id)[0], None))
                             )
-    # TODO allowed_collision_pairs
+    # Extra provided ACM
+    for id1, id2 in allowed_collision_pairs:
+        client.extra_disabled_collision_links[acm_name].add(
+                ((client._get_bodies(id1)[0], None), (client._get_bodies(id2)[0], None))
+                )
 
     trajectory = None
     for start_conf in start_ik_generator(start_frame):
@@ -151,7 +156,7 @@ def main():
         assembly_process = json.load(f, cls=DataDecoder) #type: AssemblyProcess
 
     viewer = 0
-    write = 1
+    write = 0
     debug = 1
     diagnosis = 0
 
@@ -166,7 +171,7 @@ def main():
     with PyChoreoClient(viewer=viewer) as client:
         initialize_process_scene_state(client, assembly_process)
         robot = load_robot(client, 'abb_crb15000')
-        options.update(get_tolerances(robot, super_res=True))
+        options.update(get_tolerances(robot, super_res=False))
 
         set_state(client, robot, assembly_process.get_initial_state(), options)
         # pp.wait_if_gui('Initial State')
@@ -177,12 +182,16 @@ def main():
         #     action = actions[action_index]
 
         for action in assembly_process.get_robotic_actions():
-            trajectory = None
-            if isinstance(action, FreeMovement):
-                action_index = assembly_process.actions.index(action)
-                LOGGER.debug(colored('Planning Free Movement {}'.format(action_index), 'cyan'))
+            if not isinstance(action, RoboticMovement):
+                continue
 
-                state = assembly_process.get_intermediate_state(action_index)
+            trajectory = None
+            action_index = assembly_process.actions.index(action)
+            state = assembly_process.get_intermediate_state(action_index)
+
+            if isinstance(action, FreeMovement):
+                # continue
+                LOGGER.debug(colored('Planning Free Movement {}'.format(action_index), 'cyan'))
 
                 start_conf = assembly_process.get_action_starting_configuration(action)
                 start_frame = state.robot_state.frame
@@ -197,13 +206,16 @@ def main():
                     pp.add_text('End', end_frame.point, color=(1,0,0))
 
                 trajectory = plan_free_movement(client, robot, 
-                                                state, action, 
+                                                state, action.allowed_collision_pairs, 
                                                 start_conf, end_conf, 
                                                 start_frame, end_frame,
                                                 group=None, options=options)
+            elif isinstance(action, LinearMovement):
+                continue
+                pass
 
             if trajectory is not None:
-                LOGGER.debug(colored('Trajectory found for movement {}'.format(action_index), 'green'))
+                LOGGER.info(colored('Trajectory found for movement {}'.format(action_index), 'green'))
                 action.planned_trajectory = trajectory
 
                 # replay for debugging
@@ -213,7 +225,7 @@ def main():
                         client.set_robot_configuration(robot, conf)
                         pp.wait_if_gui('Step traj')
             else:
-                LOGGER.debug(colored('Trajectory NOT found for movement {}'.format(action_index), 'red'))
+                LOGGER.info(colored('Trajectory NOT found for movement {}'.format(action_index), 'red'))
                 # raise ValueError("Trajectory not found")
 
     if write:
