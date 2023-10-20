@@ -10,9 +10,15 @@ Whenever you open a new terminal, you need to activate the environment again.
 These commands are best executed in the Anaconda Prompt or Anaconda Powershell Prompt.
 
 ```bash
-conda create --name acadia_tamp  -c conda-forge  --yes numpy networkx scipy matplotlib-base pillow schema sympy typing_extensions watchdog "jsonschema>=4.17,<4.18" imageio pyserial pybullet roslibpy pycollada colorama python=3.11
+conda create --name acadia_tamp  -c conda-forge  --yes numpy networkx scipy matplotlib-base pillow schema sympy typing_extensions watchdog "jsonschema>=4.17,<4.18" imageio pyserial pybullet roslibpy pycollada colorama python=3.7
+```
+
+Activate the environment
+
+```
 conda activate acadia_tamp
 ```
+
 ### To Delete the environment
 
 ```bash
