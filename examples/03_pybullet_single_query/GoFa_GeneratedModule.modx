@@ -1,0 +1,243 @@
+Module ACADIA_WORKSHOP_00_TEST
+!Declarations
+
+!jointtarget
+VAR jointtarget TGofa_InitialConfig:=[[0,0,0,0,90,0],[9E9,9E9,9E9,9E9,9E9,9E9]];
+
+!robtarget (Not Used for MoveAbsJ)
+!VAR robtarget TGofa_0_End:=[[365,77.458,68.392],[0.707107,0,0,0.707107],[-1,0,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];
+
+!speeddata (mm/s for the TCP, degrees/s for reorientation of the tool, mm/s for linear external axes, degrees/s for rotating external axes)
+VAR speeddata speeddata0:=[200,80,5000,1000];
+
+!tooldata (Not Used)
+!PERS tooldata PonGoFa:=[True,[[-36.666,0.002,138.175],[0,0.92388,0,0.382683]],[0.001,[0,0,0.1],[1,0,0,0],0,0,0]];
+
+!wobjdata (Not Used for MoveAbsJ)
+!PERS wobjdata Root:=[False,True,"",[[0,0,0],[1,0,0,0]],[[0,0,0],[1,0,0,0]]];
+
+!zonedata (Blend)
+VAR zonedata DefaultBlend:=[False,1,0.1,1,0.1,1,0.1];
+VAR zonedata FinePoint:=[True,1,0.1,1,0.1,1,0.1];
+
+Proc Main()
+  !Path Acceleration Limitation, units is m/s2, syntax: PathAccLim AccLim [\AccMax] DecelLim [\DecelMax]
+  PathAccLim TRUE\AccMax:=10,TRUE\DecelMax:=10;
+
+  !Move Absolute Joint MoveAbsJ [\Conc] ToJointPos [\ID] [\NoEOffs] Speed [\V] | [\T] Zone [\Z] [\Inpos] Tool [\WObj]
+  !Move to Initial Config
+  MoveAbsJ TGofa_InitialConfig,speeddata0,FinePoint,tool0;
+  MoveAbsJ [[0.00,0.00,0.00,0.00,90.00,0.00],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-0.72,-1.72,-2.48,-1.55,87.18,-1.68],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-1.43,-3.45,-4.95,-3.10,84.37,-3.36],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-2.15,-5.17,-7.43,-4.65,81.55,-5.03],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-2.87,-6.89,-9.91,-6.19,78.74,-6.71],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-3.59,-8.61,-12.38,-7.74,75.92,-8.39],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-4.30,-10.34,-14.86,-9.29,73.10,-10.07],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-5.02,-12.06,-17.34,-10.84,70.29,-11.75],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-5.74,-13.78,-19.81,-12.39,67.47,-13.43],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-6.45,-15.51,-22.29,-13.94,64.66,-15.10],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-7.51,-14.82,-23.00,-11.24,62.10,-15.87],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-8.57,-14.14,-23.70,-8.53,59.55,-16.63],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-9.63,-13.46,-24.41,-5.83,56.99,-17.40],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-10.69,-12.78,-25.12,-3.13,54.44,-18.16],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-11.75,-12.10,-25.83,-0.43,51.89,-18.93],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-12.81,-11.42,-26.53,2.27,49.33,-19.69],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-13.87,-10.74,-27.24,4.97,46.78,-20.46],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-14.92,-10.05,-27.95,7.67,44.22,-21.22],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-15.98,-9.37,-28.65,10.37,41.67,-21.99],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-17.04,-8.69,-29.36,13.08,39.11,-22.75],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-18.74,-7.84,-29.97,15.68,36.38,-23.36],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-20.44,-7.00,-30.58,18.29,33.65,-23.96],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-22.14,-6.15,-31.19,20.90,30.92,-24.57],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-23.84,-5.30,-31.80,23.50,28.19,-25.18],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-25.54,-4.45,-32.41,26.11,25.46,-25.78],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-27.24,-3.61,-33.03,28.72,22.73,-26.39],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-28.94,-2.76,-33.64,31.33,20.00,-26.99],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-30.64,-1.91,-34.25,33.93,17.27,-27.60],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-32.35,-1.06,-34.86,36.54,14.54,-28.21],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-34.05,-0.22,-35.47,39.15,11.81,-28.81],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-35.75,0.63,-36.08,41.75,9.08,-29.42],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-37.45,1.48,-36.69,44.36,6.35,-30.02],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-39.15,2.33,-37.30,46.97,3.62,-30.63],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-40.00,2.75,-37.61,48.27,2.25,-30.93],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-42.37,4.87,-38.91,47.17,-0.22,-30.76],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-44.74,6.99,-40.20,46.07,-2.69,-30.59],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-47.11,9.11,-41.50,44.97,-5.16,-30.41],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-49.48,11.23,-42.80,43.87,-7.63,-30.24],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-51.86,13.35,-44.10,42.78,-10.10,-30.06],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-54.23,15.46,-45.40,41.68,-12.57,-29.89],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-56.60,17.58,-46.70,40.58,-15.04,-29.71],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-58.97,19.70,-47.99,39.48,-17.51,-29.54],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-61.34,21.82,-49.29,38.38,-19.98,-29.36],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-63.71,23.94,-50.59,37.28,-22.45,-29.19],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-64.13,24.82,-51.06,34.54,-22.16,-28.61],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-64.55,25.70,-51.53,31.80,-21.88,-28.03],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-64.97,26.57,-52.00,29.06,-21.59,-27.45],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-65.39,27.45,-52.47,26.32,-21.31,-26.87],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-65.81,28.33,-52.94,23.58,-21.03,-26.30],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-66.23,29.21,-53.41,20.84,-20.74,-25.72],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-66.64,30.09,-53.88,18.10,-20.46,-25.14],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-67.06,30.96,-54.34,15.36,-20.17,-24.56],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-67.48,31.84,-54.81,12.62,-19.89,-23.98],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-67.90,32.72,-55.28,9.88,-19.61,-23.40],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-68.32,33.60,-55.75,7.14,-19.32,-22.82],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-68.74,34.47,-56.22,4.39,-19.04,-22.24],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-69.16,35.35,-56.69,1.65,-18.75,-21.66],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-69.58,36.23,-57.16,-1.09,-18.47,-21.08],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-69.99,37.11,-57.63,-3.83,-18.19,-20.50],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-69.41,37.55,-58.01,-6.63,-17.23,-20.04],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-68.82,37.99,-58.40,-9.44,-16.28,-19.57],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-68.23,38.43,-58.78,-12.25,-15.33,-19.10],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-67.64,38.87,-59.16,-15.05,-14.38,-18.63],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-67.05,39.31,-59.55,-17.86,-13.43,-18.16],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-66.46,39.75,-59.93,-20.67,-12.48,-17.69],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-65.87,40.19,-60.32,-23.48,-11.53,-17.22],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-65.28,40.63,-60.70,-26.28,-10.58,-16.75],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-64.69,41.07,-61.08,-29.09,-9.63,-16.28],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-64.11,41.51,-61.47,-31.90,-8.68,-15.82],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-63.52,41.95,-61.85,-34.70,-7.73,-15.35],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-62.93,42.39,-62.24,-37.51,-6.78,-14.88],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-62.34,42.83,-62.62,-40.32,-5.83,-14.41],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-61.75,43.27,-63.00,-43.12,-4.88,-13.94],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-61.16,43.71,-63.39,-45.93,-3.93,-13.47],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-60.57,44.15,-63.77,-48.74,-2.98,-13.00],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-59.98,44.59,-64.16,-51.54,-2.03,-12.53],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-59.39,45.03,-64.54,-54.35,-1.08,-12.06],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-58.81,45.47,-64.92,-57.16,-0.13,-11.60],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-58.22,45.91,-65.31,-59.97,0.83,-11.13],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-57.63,46.35,-65.69,-62.77,1.78,-10.66],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-57.04,46.79,-66.07,-65.58,2.73,-10.19],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-56.45,47.23,-66.46,-68.39,3.68,-9.72],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-55.86,47.67,-66.84,-71.19,4.63,-9.25],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-55.27,48.11,-67.23,-74.00,5.58,-8.78],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-54.68,48.55,-67.61,-76.81,6.53,-8.31],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-54.09,48.99,-67.99,-79.61,7.48,-7.84],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-53.51,49.43,-68.38,-82.42,8.43,-7.38],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-52.92,49.87,-68.76,-85.23,9.38,-6.91],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-52.33,50.31,-69.15,-88.03,10.33,-6.44],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-51.74,50.75,-69.53,-90.84,11.28,-5.97],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-51.15,51.19,-69.91,-93.65,12.23,-5.50],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-50.56,51.63,-70.30,-96.46,13.18,-5.03],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-49.97,52.07,-70.68,-99.26,14.13,-4.56],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-49.38,52.51,-71.07,-102.07,15.08,-4.09],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-50.74,54.75,-72.56,-104.86,13.57,-3.68],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-52.11,57.00,-74.05,-107.66,12.07,-3.27],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-53.47,59.25,-75.55,-110.45,10.56,-2.87],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-54.83,61.50,-77.04,-113.24,9.05,-2.46],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-56.19,63.75,-78.53,-116.03,7.54,-2.05],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-57.55,66.00,-80.03,-118.83,6.03,-1.64],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-58.91,68.25,-81.52,-121.62,4.52,-1.23],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-60.28,70.50,-83.01,-124.41,3.02,-0.82],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-61.64,72.75,-84.51,-127.21,1.51,-0.41],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-63.00,75.00,-86.00,-130.00,0.00,0.00],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,FinePoint,tool0;
+  MoveAbsJ [[-63.00,75.00,-86.00,-130.00,0.00,0.00],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-61.64,72.75,-84.51,-127.21,1.51,-0.41],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-60.28,70.50,-83.01,-124.41,3.02,-0.82],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-58.91,68.25,-81.52,-121.62,4.52,-1.23],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-57.55,66.00,-80.03,-118.83,6.03,-1.64],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-56.19,63.75,-78.53,-116.03,7.54,-2.05],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-54.83,61.50,-77.04,-113.24,9.05,-2.46],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-53.47,59.25,-75.55,-110.45,10.56,-2.87],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-52.11,57.00,-74.05,-107.66,12.07,-3.27],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-50.74,54.75,-72.56,-104.86,13.57,-3.68],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-49.38,52.51,-71.07,-102.07,15.08,-4.09],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-49.97,52.07,-70.68,-99.26,14.13,-4.56],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-50.56,51.63,-70.30,-96.46,13.18,-5.03],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-51.15,51.19,-69.91,-93.65,12.23,-5.50],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-51.74,50.75,-69.53,-90.84,11.28,-5.97],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-52.33,50.31,-69.15,-88.03,10.33,-6.44],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-52.92,49.87,-68.76,-85.23,9.38,-6.91],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-53.51,49.43,-68.38,-82.42,8.43,-7.38],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-54.09,48.99,-67.99,-79.61,7.48,-7.84],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-54.68,48.55,-67.61,-76.81,6.53,-8.31],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-55.27,48.11,-67.23,-74.00,5.58,-8.78],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-55.86,47.67,-66.84,-71.19,4.63,-9.25],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-56.45,47.23,-66.46,-68.39,3.68,-9.72],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-57.04,46.79,-66.07,-65.58,2.73,-10.19],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-57.63,46.35,-65.69,-62.77,1.78,-10.66],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-58.22,45.91,-65.31,-59.97,0.83,-11.13],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-58.81,45.47,-64.92,-57.16,-0.13,-11.60],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-59.39,45.03,-64.54,-54.35,-1.08,-12.06],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-59.98,44.59,-64.16,-51.54,-2.03,-12.53],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-60.57,44.15,-63.77,-48.74,-2.98,-13.00],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-61.16,43.71,-63.39,-45.93,-3.93,-13.47],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-61.75,43.27,-63.00,-43.12,-4.88,-13.94],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-62.34,42.83,-62.62,-40.32,-5.83,-14.41],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-62.93,42.39,-62.24,-37.51,-6.78,-14.88],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-63.52,41.95,-61.85,-34.70,-7.73,-15.35],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-64.11,41.51,-61.47,-31.90,-8.68,-15.82],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-64.69,41.07,-61.08,-29.09,-9.63,-16.28],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-65.28,40.63,-60.70,-26.28,-10.58,-16.75],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-65.87,40.19,-60.32,-23.48,-11.53,-17.22],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-66.46,39.75,-59.93,-20.67,-12.48,-17.69],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-67.05,39.31,-59.55,-17.86,-13.43,-18.16],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-67.64,38.87,-59.16,-15.05,-14.38,-18.63],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-68.23,38.43,-58.78,-12.25,-15.33,-19.10],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-68.82,37.99,-58.40,-9.44,-16.28,-19.57],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-69.41,37.55,-58.01,-6.63,-17.23,-20.04],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-69.99,37.11,-57.63,-3.83,-18.19,-20.50],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-69.58,36.23,-57.16,-1.09,-18.47,-21.08],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-69.16,35.35,-56.69,1.65,-18.75,-21.66],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-68.74,34.47,-56.22,4.39,-19.04,-22.24],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-68.32,33.60,-55.75,7.14,-19.32,-22.82],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-67.90,32.72,-55.28,9.88,-19.61,-23.40],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-67.48,31.84,-54.81,12.62,-19.89,-23.98],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-67.06,30.96,-54.34,15.36,-20.17,-24.56],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-66.64,30.09,-53.88,18.10,-20.46,-25.14],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-66.23,29.21,-53.41,20.84,-20.74,-25.72],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-65.81,28.33,-52.94,23.58,-21.03,-26.30],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-65.39,27.45,-52.47,26.32,-21.31,-26.87],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-64.97,26.57,-52.00,29.06,-21.59,-27.45],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-64.55,25.70,-51.53,31.80,-21.88,-28.03],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-64.13,24.82,-51.06,34.54,-22.16,-28.61],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-63.71,23.94,-50.59,37.28,-22.45,-29.19],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-61.34,21.82,-49.29,38.38,-19.98,-29.36],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-58.97,19.70,-47.99,39.48,-17.51,-29.54],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-56.60,17.58,-46.70,40.58,-15.04,-29.71],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-54.23,15.46,-45.40,41.68,-12.57,-29.89],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-51.86,13.35,-44.10,42.78,-10.10,-30.06],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-49.48,11.23,-42.80,43.87,-7.63,-30.24],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-47.11,9.11,-41.50,44.97,-5.16,-30.41],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-44.74,6.99,-40.20,46.07,-2.69,-30.59],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-42.37,4.87,-38.91,47.17,-0.22,-30.76],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-40.00,2.75,-37.61,48.27,2.25,-30.93],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-39.15,2.33,-37.30,46.97,3.62,-30.63],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-37.45,1.48,-36.69,44.36,6.35,-30.02],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-35.75,0.63,-36.08,41.75,9.08,-29.42],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-34.05,-0.22,-35.47,39.15,11.81,-28.81],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-32.35,-1.06,-34.86,36.54,14.54,-28.21],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-30.64,-1.91,-34.25,33.93,17.27,-27.60],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-28.94,-2.76,-33.64,31.33,20.00,-26.99],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-27.24,-3.61,-33.03,28.72,22.73,-26.39],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-25.54,-4.45,-32.41,26.11,25.46,-25.78],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-23.84,-5.30,-31.80,23.50,28.19,-25.18],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-22.14,-6.15,-31.19,20.90,30.92,-24.57],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-20.44,-7.00,-30.58,18.29,33.65,-23.96],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-18.74,-7.84,-29.97,15.68,36.38,-23.36],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-17.04,-8.69,-29.36,13.08,39.11,-22.75],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-15.98,-9.37,-28.65,10.37,41.67,-21.99],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-14.92,-10.05,-27.95,7.67,44.22,-21.22],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-13.87,-10.74,-27.24,4.97,46.78,-20.46],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-12.81,-11.42,-26.53,2.27,49.33,-19.69],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-11.75,-12.10,-25.83,-0.43,51.89,-18.93],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-10.69,-12.78,-25.12,-3.13,54.44,-18.16],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-9.63,-13.46,-24.41,-5.83,56.99,-17.40],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-8.57,-14.14,-23.70,-8.53,59.55,-16.63],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-7.51,-14.82,-23.00,-11.24,62.10,-15.87],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-6.45,-15.51,-22.29,-13.94,64.66,-15.10],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-5.74,-13.78,-19.81,-12.39,67.47,-13.43],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-5.02,-12.06,-17.34,-10.84,70.29,-11.75],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-4.30,-10.34,-14.86,-9.29,73.10,-10.07],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-3.59,-8.61,-12.38,-7.74,75.92,-8.39],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-2.87,-6.89,-9.91,-6.19,78.74,-6.71],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-2.15,-5.17,-7.43,-4.65,81.55,-5.03],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-1.43,-3.45,-4.95,-3.10,84.37,-3.36],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[-0.72,-1.72,-2.48,-1.55,87.18,-1.68],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,DefaultBlend,tool0;
+  MoveAbsJ [[0.00,0.00,0.00,0.00,90.00,0.00],[9E9,9E9,9E9,9E9,9E9,9E9]],speeddata0,FinePoint,tool0;
+  !Move back to Initial Config at the end
+  MoveAbsJ TGofa_InitialConfig,speeddata0,FinePoint,tool0;
+  TPWrite "Program Execution Complete";
+EndProc
+
+EndModule
