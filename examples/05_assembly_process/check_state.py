@@ -11,7 +11,6 @@ import pybullet_planning as pp
 from state import initialize_process_scene_state, load_robot, set_state
 from acm import add_acm, remove_acm
 from utils import LOGGER
-
 HERE = os.path.dirname(__file__)
 
 def check_state_collisions(client: PyChoreoClient, robot : RobotModel, state: SceneState, options=None):
@@ -33,7 +32,6 @@ def check_state_collisions(client: PyChoreoClient, robot : RobotModel, state: Sc
 
     if debug and in_collision:
         client._print_object_summary()
-        pp.wait_for_user('Collision checked: {}'.format(in_collision))
 
     return in_collision
 
@@ -41,6 +39,7 @@ def check_state_collisions(client: PyChoreoClient, robot : RobotModel, state: Sc
 with open(os.path.join(HERE, 'process.json'), 'r') as f:
     assembly_process = json.load(f, cls=DataDecoder) #type: AssemblyProcess
 
+viewer = True
 debug = True
 options = {
     'debug': debug,
@@ -51,7 +50,7 @@ logging_level = logging.DEBUG if debug else logging.INFO
 LOGGER.setLevel(logging_level)
 
 # Initialize PyChoreoClient
-with PyChoreoClient(viewer=True) as client:
+with PyChoreoClient(viewer=viewer) as client:
     initialize_process_scene_state(client, assembly_process)
     robot = load_robot(client, 'abb_crb15000')
 
@@ -60,6 +59,7 @@ with PyChoreoClient(viewer=True) as client:
     set_state(client, robot, initial_state)
 
     # Set Subsequent states
+    failed_action_ids = []
     for action in assembly_process.get_robotic_actions():
         action_index = assembly_process.actions.index(action)
         start_state = assembly_process.get_intermediate_state(action_index)
@@ -77,3 +77,10 @@ with PyChoreoClient(viewer=True) as client:
             LOGGER.warning(f"End state of action {action_index} is in collision.")
 
         remove_acm(client, acm_name)
+
+        if start_state_in_collision or end_state_in_collision:
+            failed_action_ids.append(action_index)
+
+LOGGER.info('Check state finished!')
+if len(failed_action_ids) > 0:
+    LOGGER.warning(f'Actions that needs care and love (in collision): {failed_action_ids}')
