@@ -11,7 +11,7 @@ from compas_fab_pychoreo.client import PyChoreoClient
 from compas_fab_pychoreo.conversions import pose_from_frame
 
 from state import set_state
-from acm import add_acm
+from acm import add_acm, remove_acm
 from utils import LOGGER
 
 IKFAST_INSTALLED = False
@@ -104,9 +104,7 @@ def plan_free_movement(client: PyChoreoClient,
         if trajectory is not None:
             break
 
-    # clean up ACM
-    if acm_name in client.extra_disabled_collision_links:
-        del client.extra_disabled_collision_links[acm_name]
+    remove_acm(client, acm_name)
 
     return trajectory
     
@@ -170,8 +168,6 @@ def plan_linear_movement(client,
         trajectory = JointTrajectory(trajectory_points=jt_traj_pts, joint_names=joint_names,
             start_configuration=jt_traj_pts[0], fraction=1.0)
 
-    # clean up ACM
-    if acm_name in client.extra_disabled_collision_links:
-        del client.extra_disabled_collision_links[acm_name]
+    remove_acm(client, acm_name)
 
     return trajectory

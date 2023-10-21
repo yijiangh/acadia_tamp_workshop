@@ -1,15 +1,17 @@
 import json
-import os
+import os, logging
+from tracemalloc import start
+from termcolor import colored
 
-from compas.data import DataDecoder
-
+from compas.data import DataDecoder, DataEncoder
 from compas_fab.planning import AssemblyProcess, SceneState
 from compas_fab_pychoreo.client import PyChoreoClient
-from compas.robots import RobotModel
+from compas_fab.robots import JointTrajectory, JointTrajectoryPoint, Duration
+from compas_fab_pychoreo.conversions import pose_from_frame
 
 import pybullet_planning as pp
 from state import initialize_process_scene_state, load_robot, set_state
-from acm import add_acm
+from acm import add_acm, remove_acm
 from motions import get_ik_generator
 from utils import LOGGER
 
@@ -20,11 +22,17 @@ with open(os.path.join(HERE, 'process.json'), 'r') as f:
     assembly_process = json.load(f, cls=DataDecoder) #type: AssemblyProcess
 
 viewer = False
+debug = True
+write = True
 max_ik_attempts = 100
+
 options = {
-    'debug': True,
+    'debug': debug,
     'diagnosis': False
     }
+
+logging_level = logging.DEBUG if debug else logging.INFO
+LOGGER.setLevel(logging_level)
 
 # Initialize PyChoreoClient
 with PyChoreoClient(viewer=viewer) as client:
@@ -39,6 +47,9 @@ with PyChoreoClient(viewer=viewer) as client:
 
     # Set Subsequent states
     for action in assembly_process.get_robotic_actions():
+    # for _ in [0] :
+    #     action = assembly_process.actions[6]
+
         action_index = assembly_process.actions.index(action)
         start_state = assembly_process.get_intermediate_state(action_index)
         end_state = assembly_process.get_intermediate_state(action_index+1)
@@ -53,13 +64,20 @@ with PyChoreoClient(viewer=viewer) as client:
         end_frame = action.robot_target
 
         set_state(client, robot, start_state, options)
+
+        if debug and viewer:
+            pp.draw_pose(pose_from_frame(start_frame), length=0.1)
+            pp.add_text('Start', start_frame.point, color=(1,0,0))
+            pp.draw_pose(pose_from_frame(end_frame), length=0.1)
+            pp.add_text('End', end_frame.point, color=(1,0,0))
+
         if start_conf is not None:
             start_conf_in_collision = client.check_collisions(robot, start_conf, options=options)
             if start_conf_in_collision:
                 LOGGER.warning(f"Start configuration of action {action_index} is in collision.")
         else:
             for start_conf in ik_generator(start_frame):
-                if options['debug']:
+                if debug:
                     client.set_robot_configuration(robot, start_conf)
                     pp.wait_if_gui('Start conf found.')
                 break
@@ -73,14 +91,22 @@ with PyChoreoClient(viewer=viewer) as client:
                 LOGGER.warning(f"End configuration of action {action_index} is in collision.")
         else:
             for end_conf in ik_generator(end_frame):
-                if options['debug']:
+                # * save back to the process
+                if debug:
                     client.set_robot_configuration(robot, end_conf)
                     pp.wait_if_gui('End conf found.')
                 break
             else:
                 LOGGER.warning(f"End state of action {action_index} does not have a valid IK solution.")
 
-        # remove ACM of the current action
-        if acm_name in client.extra_disabled_collision_links:
-            del client.extra_disabled_collision_links[acm_name]
+        if start_conf is not None and end_conf is not None:
+            # save the found IK solutions back to the process
+            action.planned_trajectory = JointTrajectory(trajectory_points=[start_conf, end_conf], joint_names=start_conf.joint_names,
+                start_configuration=start_conf, fraction=1.0)
 
+        remove_acm(client, acm_name)
+
+if write:
+    with open(os.path.join(HERE, 'process.json'), 'w') as f:
+        json.dump(assembly_process, f, cls=DataEncoder, indent=4, sort_keys=True)
+    LOGGER.info(colored('Process saved to process.json', 'green'))

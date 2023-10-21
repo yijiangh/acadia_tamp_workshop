@@ -1,8 +1,8 @@
 from typing import List, Tuple
-from compas_fab.planning.action import RoboticMovement
 from compas_fab.planning import SceneState
+from compas_fab_pychoreo.client import PyChoreoClient
 
-def add_acm(client, state: SceneState, acm_name: str, allowed_collision_pairs:List[Tuple[str, str]]=None):
+def add_acm(client: PyChoreoClient, state: SceneState, acm_name: str, allowed_collision_pairs:List[Tuple[str, str]]=None):
     allowed_collision_pairs = allowed_collision_pairs or []
 
     # add ACM of the current action
@@ -21,3 +21,6 @@ def add_acm(client, state: SceneState, acm_name: str, allowed_collision_pairs:Li
                 ((client._get_bodies(id1)[0], None), (client._get_bodies(id2)[0], None))
                 )
 
+def remove_acm(client: PyChoreoClient, acm_name: str):
+    if acm_name in client.extra_disabled_collision_links:
+        del client.extra_disabled_collision_links[acm_name]

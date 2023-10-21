@@ -1,5 +1,5 @@
 import json
-import os
+import os, logging
 
 from compas.data import DataDecoder
 
@@ -9,7 +9,7 @@ from compas.robots import RobotModel
 
 import pybullet_planning as pp
 from state import initialize_process_scene_state, load_robot, set_state
-from acm import add_acm
+from acm import add_acm, remove_acm
 from utils import LOGGER
 
 HERE = os.path.dirname(__file__)
@@ -41,10 +41,14 @@ def check_state_collisions(client: PyChoreoClient, robot : RobotModel, state: Sc
 with open(os.path.join(HERE, 'process.json'), 'r') as f:
     assembly_process = json.load(f, cls=DataDecoder) #type: AssemblyProcess
 
+debug = True
 options = {
-    'debug': True,
+    'debug': debug,
     'diagnosis': True
     }
+
+logging_level = logging.DEBUG if debug else logging.INFO
+LOGGER.setLevel(logging_level)
 
 # Initialize PyChoreoClient
 with PyChoreoClient(viewer=True) as client:
@@ -72,7 +76,4 @@ with PyChoreoClient(viewer=True) as client:
         if end_state_in_collision:
             LOGGER.warning(f"End state of action {action_index} is in collision.")
 
-        # remove ACM of the current action
-        if acm_name in client.extra_disabled_collision_links:
-            del client.extra_disabled_collision_links[acm_name]
-
+        remove_acm(client, acm_name)

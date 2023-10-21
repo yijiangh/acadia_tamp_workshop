@@ -105,5 +105,5 @@ with PyChoreoClient(viewer=viewer) as client:
 if write:
     with open(os.path.join(HERE, 'process.json'), 'w') as f:
         json.dump(assembly_process, f, cls=DataEncoder, indent=4, sort_keys=True)
-    LOGGER.info('Process saved to process.json')
+    LOGGER.info(colored('Process saved to process.json', 'green'))
 
