@@ -24,7 +24,7 @@ with open(os.path.join(HERE, 'process.json'), 'r') as f:
 
 viewer = False
 write = True
-debug = False
+debug = True
 watch_traj = False
 diagnosis = False
 
@@ -33,8 +33,14 @@ LOGGER.setLevel(logging_level)
 
 options = {
     'debug': debug,
-    'diagnosis': diagnosis
+    'diagnosis': diagnosis,
+    'rrt_restarts': 20,
+    'max_ik_attempts': 500,
     }
+
+# Remove all the trajectories from the process
+for action in assembly_process.get_robotic_actions():
+    action.planned_trajectory = None
 
 with PyChoreoClient(viewer=viewer) as client:
     initialize_process_scene_state(client, assembly_process)
@@ -71,18 +77,19 @@ with PyChoreoClient(viewer=viewer) as client:
         if isinstance(action, FreeMovement):
             # continue
             LOGGER.debug(colored('Planning Free Movement {}'.format(action_index), 'cyan'))
-            trajectory = plan_free_movement(client, robot, 
-                                            state, action.allowed_collision_pairs, 
-                                            start_conf, end_conf, 
+            trajectory = plan_free_movement(client, robot,
+                                            state, action.allowed_collision_pairs,
+                                            start_conf, end_conf,
                                             start_frame, end_frame,
                                             group=None, options=options)
         elif isinstance(action, LinearMovement):
             # continue
             LOGGER.debug(colored('Planning Linear Movement {}'.format(action_index), 'cyan'))
-            trajectory = plan_linear_movement(client, robot, 
-                                              state, action.allowed_collision_pairs, 
-                                              start_conf, end_conf, 
+            trajectory = plan_linear_movement(client, robot,
+                                              state, action.allowed_collision_pairs,
+                                              start_conf, end_conf,
                                               start_frame, end_frame,
+                                              max_ik_attempts=options['max_ik_attempts'],
                                               group=None, options=options)
 
         if trajectory is not None:

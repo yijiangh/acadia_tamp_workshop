@@ -72,3 +72,31 @@ TODO: to be debated if we should make this repo as a package
 <!-- pip install -e . -->
 <!-- # Run the following code add the python library paths to Rhino / Grasshopper:
 python -m compas_rhino.install -p compas compas_fab compas_ghpython integral_timber_joints -->
+
+
+
+## Validate the installation
+
+Activate the environment
+
+```bash
+conda activate acadia_tamp
+```
+
+Go to the workshop folder
+
+```bash
+cd <your working directory>
+```
+Run the follwing example file:
+
+```bash
+python examples\03_pybullet_single_query\plan_free_motion.py
+```
+
+You should see the result:
+```bash
+pybullet build time: Oct 14 2023 15:51:40
+Found a trajectory!
+Planning took 3.998746395111084 seconds
+```
