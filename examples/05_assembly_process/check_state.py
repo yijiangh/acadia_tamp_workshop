@@ -58,7 +58,6 @@ with PyChoreoClient(viewer=viewer) as client:
     initial_state = assembly_process.get_initial_state()
     set_state(client, robot, initial_state)
 
-    # Set Subsequent states
     failed_action_ids = []
     for action in assembly_process.get_robotic_actions():
         action_index = assembly_process.actions.index(action)
@@ -69,12 +68,12 @@ with PyChoreoClient(viewer=viewer) as client:
 
         start_state_in_collision = check_state_collisions(client, robot, start_state, options)
         if start_state_in_collision:
-            LOGGER.warning(f"Start state of action {action_index} is in collision.")
+            LOGGER.warning(f"Start state of action {action_index} ({action.__class__.__name__}) is in collision.")
 
         end_state = assembly_process.get_intermediate_state(action_index+1)
         end_state_in_collision = check_state_collisions(client, robot, start_state, options)
         if end_state_in_collision:
-            LOGGER.warning(f"End state of action {action_index} is in collision.")
+            LOGGER.warning(f"End state of action {action_index} ({action.__class__.__name__}) is in collision.")
 
         remove_acm(client, acm_name)
 

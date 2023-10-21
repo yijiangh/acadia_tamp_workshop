@@ -24,7 +24,7 @@ with open(os.path.join(HERE, 'process.json'), 'r') as f:
 viewer = False
 debug = True
 write = True
-max_ik_attempts = 100
+max_ik_attempts = 200
 
 options = {
     'debug': debug,
@@ -45,11 +45,7 @@ with PyChoreoClient(viewer=viewer) as client:
 
     ik_generator = get_ik_generator(client, robot, max_attempts=max_ik_attempts,  options=options)
 
-    # Set Subsequent states
     for action in assembly_process.get_robotic_actions():
-    # for _ in [0] :
-    #     action = assembly_process.actions[6]
-
         action_index = assembly_process.actions.index(action)
         start_state = assembly_process.get_intermediate_state(action_index)
         end_state = assembly_process.get_intermediate_state(action_index+1)
@@ -74,7 +70,7 @@ with PyChoreoClient(viewer=viewer) as client:
         if start_conf is not None:
             start_conf_in_collision = client.check_collisions(robot, start_conf, options=options)
             if start_conf_in_collision:
-                LOGGER.warning(f"Start configuration of action {action_index} is in collision.")
+                LOGGER.warning(f"Start configuration of action {action_index} ({action.__class__.__name__}) is in collision.")
         else:
             if start_frame is not None:
                 for start_conf in ik_generator(start_frame):
@@ -83,13 +79,13 @@ with PyChoreoClient(viewer=viewer) as client:
                         pp.wait_if_gui('Start conf found.')
                     break
                 else:
-                    LOGGER.warning(f"Start state of action {action_index} does not have a valid IK solution.")
+                    LOGGER.warning(f"Start state of action {action_index} ({action.__class__.__name__}) does not have a valid IK solution.")
 
         set_state(client, robot, end_state, options)
         if end_conf is not None:
             end_conf_in_collision = client.check_collisions(robot, end_conf, options=options)
             if end_conf_in_collision:
-                LOGGER.warning(f"End configuration of action {action_index} is in collision.")
+                LOGGER.warning(f"End configuration of action {action_index} ({action.__class__.__name__}) is in collision.")
         else:
             if end_frame is not None:
                 for end_conf in ik_generator(end_frame):
@@ -99,7 +95,7 @@ with PyChoreoClient(viewer=viewer) as client:
                         pp.wait_if_gui('End conf found.')
                     break
                 else:
-                    LOGGER.warning(f"End state of action {action_index} does not have a valid IK solution.")
+                    LOGGER.warning(f"End state of action {action_index} ({action.__class__.__name__}) does not have a valid IK solution.")
 
         if start_conf is not None and end_conf is not None:
             # save the found IK solutions back to the process
