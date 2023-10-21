@@ -1,7 +1,21 @@
+import os
+import json
+import logging
+import pybullet_planning as pp
+from termcolor import colored
+
+from compas.data import DataDecoder, DataEncoder
+from typing import List
+
 from functions import load_process
 from compas_fab.planning import AssemblyProcess, FreeMovement, LinearMovement, RoboticMovement
 
-from typing import List
+from compas_fab_pychoreo.client import PyChoreoClient
+from compas_fab_pychoreo.conversions import pose_from_frame
+
+from state import initialize_process_scene_state, load_robot, set_state
+from motions import plan_free_movement, plan_linear_movement
+from utils import LOGGER, get_tolerances
 
 # The scope of the planning process includes the following options:
 #
@@ -25,7 +39,7 @@ planning_scope = 'ALL'
 
 # For ``SINGLE_LMG`` and ``SINGLE_FMG`` scopes, specify the index of the movement group to plan.
 # The index refers to the index among all actions in process, as in process.actions[single_group_action_index].
-single_group_action_index = 14
+single_group_action_index = 39
 
 # For ``INDIVIDUAL_MOVEMENTS`` scope, specify the indices of the movement to plan.
 individual_movement_indices = [3,4,6,7]
@@ -85,72 +99,140 @@ print("Total Number of Actions to plan: {}".format(len(staged_actions)))
 for action in staged_actions:
     action.planned_trajectory = None
 
-# Plan the staged LMG
-# The planner will be constrained by the configurations of the neighbour trajectories.
+###################
+# Actual planning computation starts here
+viewer = False
+write = True
+debug = False
+diagnosis = False
 
-if planning_scope in ['SINGLE_LMG', 'ALL_LMG', 'ALL']:
-    print("Planning Linear Movement Groups")
-    for group in staged_lmgs:
-        print("- Planning Linear Movement Group")
-        success = False
-        for action in group:
+logging_level = logging.DEBUG if debug else logging.INFO
+LOGGER.setLevel(logging_level)
+
+options = {
+    'debug': debug,
+    'diagnosis': diagnosis,
+    'rrt_restarts': 20,
+    'max_ik_attempts': 500,
+    }
+
+with PyChoreoClient(viewer=viewer) as client:
+    initialize_process_scene_state(client, process)
+    robot = load_robot(client, 'abb_crb15000')
+    options.update(get_tolerances(robot, super_res=True))
+
+    set_state(client, robot, process.get_initial_state(), options)
+
+    # Plan the staged LMG
+    # The planner will be constrained by the configurations of the neighbour trajectories.
+
+    if planning_scope in ['SINGLE_LMG', 'ALL_LMG', 'ALL']:
+        print("Planning Linear Movement Groups")
+        for group in staged_lmgs:
+            print("- Planning Linear Movement Group")
+            success = False
+            for action in group:
+                action_index = process.actions.index(action)
+                scene_state = process.get_intermediate_state(action_index)
+
+                start_conf = process.get_action_starting_configuration(action)
+                start_frame = scene_state.robot_state.frame
+
+                end_conf = process.get_action_ending_configuration(action)
+                end_frame = action.robot_target
+
+                print("- - Planning (index={}) LinearMovement".format(action_index))
+                trajectory = plan_linear_movement(client, robot,
+                                                  scene_state, action.allowed_collision_pairs,
+                                                  start_conf, end_conf,
+                                                  start_frame, end_frame,
+                                                  max_ik_attempts=options['max_ik_attempts'],
+                                                  group=None, options=options)
+
+                success = trajectory is not None
+                if not success:
+                    break
+                action.planned_trajectory = trajectory
+
+            # Clean the partially successful planning
+            if not success:
+                print("- - Failed to plan Linear Movement Group")
+                for action in group:
+                    action.planned_trajectory = None
+        print ("Done Planning LMGs  \n\n")
+
+    if planning_scope in ['SINGLE_FMG', 'ALL_FMG', 'ALL']:
+        print("Planning Free Movement Groups")
+        for group in staged_fmgs:
+            print("- Planning Free Movement Group")
+            for action in group:
+                action_index = process.actions.index(action)
+                scene_state = process.get_intermediate_state(action_index)
+
+                start_conf = process.get_action_starting_configuration(action)
+                start_frame = scene_state.robot_state.frame
+
+                end_conf = process.get_action_ending_configuration(action)
+                end_frame = action.robot_target
+
+                print("- - Planning (index={}) FreeMovement".format(action_index))
+                trajectory = plan_free_movement(client, robot,
+                                                scene_state, action.allowed_collision_pairs,
+                                                start_conf, end_conf,
+                                                start_frame, end_frame,
+                                                group=None, options=options)
+
+                success = trajectory is not None
+                if not success:
+                    break
+                action.planned_trajectory = trajectory
+
+            # Clean the partially successful planning
+            if not success:
+                print("- - Failed to plan Linear Movement Group")
+                for action in group:
+                    action.planned_trajectory = None    
+        print ("Done Planning FMGs  \n\n")
+
+    if planning_scope in ['INDIVIDUAL_MOVEMENTS']:
+        print("Planning Individual Movements")
+        for action in staged_actions:
             action_index = process.actions.index(action)
             scene_state = process.get_intermediate_state(action_index)
-            start_configuration = process.get_action_starting_configuration(action)
-            end_configuration = process.get_action_ending_configuration(action)
 
-            print("- - Planning (index={}) LinearMovement from {} to {}".format(action_index,
-            # trajectory = action.plan(start_configuration, end_configuration, scene_state)
-            # success = trajectory is not None
-            # if not success:
-            #     break
-            # action.planned_trajectory = trajectory
-                start_configuration, end_configuration))
-        # Clean the partially successful planning
-        # if not success:
-        #     print("- - Failed to plan Linear Movement Group")
-        #     for action in group:
-        #         action.planned_trajectory = None
-    print ("Done Planning LMGs  \n\n")
+            start_conf = process.get_action_starting_configuration(action)
+            start_frame = scene_state.robot_state.frame
 
-if planning_scope in ['SINGLE_FMG', 'ALL_FMG', 'ALL']:
-    print("Planning Free Movement Groups")
-    for group in staged_fmgs:
-        print("- Planning Free Movement Group")
-        for action in group:
-            action_index = process.actions.index(action)
-            scene_state = process.get_intermediate_state(action_index)
-            start_configuration = process.get_action_starting_configuration(action)
-            end_configuration = process.get_action_ending_configuration(action)
-            # action.plan(start_configuration, end_configuration, scene_state)
-            print("- - Planning (index={}) FreeMovement from {} to {}".format(action_index,
-            # trajectory = action.plan(start_configuration, end_configuration, scene_state)
-            # success = trajectory is not None
-            # if not success:
-            #     break
-            # action.planned_trajectory = trajectory
-                start_configuration, end_configuration))
-        # Clean the partially successful planning
-        # if not success:
-        #     print("- - Failed to plan Linear Movement Group")
-        #     for action in group:
-        #         action.planned_trajectory = None    print ("Done Planning FMGs  \n\n")
+            end_conf = process.get_action_ending_configuration(action)
+            end_frame = action.robot_target
 
-if planning_scope in ['INDIVIDUAL_MOVEMENTS']:
-    print("Planning Individual Movements")
-    for action in staged_actions:
-        action_index = process.actions.index(action)
-        scene_state = process.get_intermediate_state(action_index)
-        start_configuration = process.get_action_starting_configuration(action)
-        end_configuration = process.get_action_ending_configuration(action)
-        # action.plan(start_configuration, end_configuration, scene_state)
-        print("- - Planning (index={}) {} from {} to {}".format(action_index,
-            action.__class__.__name__, start_configuration, end_configuration))
-    print ("Done Planning Individual Movements \n\n")
+            print("- - Planning (index={}) {}".format(action_index, action.__class__.__name__))
+            if isinstance(action, FreeMovement):
+                trajectory = plan_free_movement(client, robot,
+                                                scene_state, action.allowed_collision_pairs,
+                                                start_conf, end_conf,
+                                                start_frame, end_frame,
+                                                group=None, options=options)
+            elif isinstance(action, LinearMovement):
+                trajectory = plan_linear_movement(client, robot,
+                                                  scene_state, action.allowed_collision_pairs,
+                                                  start_conf, end_conf,
+                                                  start_frame, end_frame,
+                                                  max_ik_attempts=options['max_ik_attempts'],
+                                                  group=None, options=options)
+
+            success = trajectory is not None
+            if not success:
+                print("- - Failed to plan (index={}) {}".format(action_index, action.__class__.__name__))
+                continue
+            action.planned_trajectory = trajectory
+
+        print ("Done Planning Individual Movements \n\n")
 
 # Save the process to a JSON file.
 # This will overwrite the original process file.
-# from compas.utilities import DataDecoder, DataEncoder
-# import json
-# with open(json_path, 'w') as f:
-#     json.dump(object, f, cls=DataEncoder, indent=4, sort_keys=True)
+HERE = os.path.dirname(__file__)
+if write:
+    with open(os.path.join(HERE, 'process.json'), 'w') as f:
+        json.dump(process, f, cls=DataEncoder, indent=4, sort_keys=True)
+    LOGGER.info(colored('Process saved to process.json', 'green'))
