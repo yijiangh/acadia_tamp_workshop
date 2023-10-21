@@ -20,11 +20,11 @@ from utils import LOGGER, get_tolerances
 
 HERE = os.path.dirname(__file__)
 with open(os.path.join(HERE, 'process.json'), 'r') as f:
-    assembly_process = json.load(f, cls=DataDecoder) #type: AssemblyProcess
+    process = json.load(f, cls=DataDecoder) #type: AssemblyProcess
 
 viewer = False
 write = True
-debug = True
+debug = False
 watch_traj = False
 diagnosis = False
 
@@ -39,33 +39,29 @@ options = {
     }
 
 # Remove all the trajectories from the process
-for action in assembly_process.get_robotic_actions():
+for action in process.get_robotic_actions():
     action.planned_trajectory = None
 
 with PyChoreoClient(viewer=viewer) as client:
-    initialize_process_scene_state(client, assembly_process)
+    initialize_process_scene_state(client, process)
     robot = load_robot(client, 'abb_crb15000')
-    options.update(get_tolerances(robot, super_res=False))
+    options.update(get_tolerances(robot, super_res=True))
 
-    set_state(client, robot, assembly_process.get_initial_state(), options)
+    set_state(client, robot, process.get_initial_state(), options)
     # pp.wait_if_gui('Initial State')
 
-    # for i in [1]:
-    #     action_index = 53
-    #     action = assembly_process.actions[action_index]
-
-    for action in assembly_process.get_robotic_actions():
+    for action in process.get_robotic_actions():
         if not isinstance(action, RoboticMovement):
             continue
 
         trajectory = None
-        action_index = assembly_process.actions.index(action)
-        state = assembly_process.get_intermediate_state(action_index)
+        action_index = process.actions.index(action)
+        state = process.get_intermediate_state(action_index)
 
-        start_conf = assembly_process.get_action_starting_configuration(action)
+        start_conf = process.get_action_starting_configuration(action)
         start_frame = state.robot_state.frame
 
-        end_conf = assembly_process.get_action_ending_configuration(action)
+        end_conf = process.get_action_ending_configuration(action)
         end_frame = action.robot_target
 
         if debug and viewer:
@@ -75,7 +71,6 @@ with PyChoreoClient(viewer=viewer) as client:
             pp.add_text('End', end_frame.point, color=(1,0,0))
 
         if isinstance(action, FreeMovement):
-            # continue
             LOGGER.debug(colored('Planning Free Movement {}'.format(action_index), 'cyan'))
             trajectory = plan_free_movement(client, robot,
                                             state, action.allowed_collision_pairs,
@@ -83,7 +78,6 @@ with PyChoreoClient(viewer=viewer) as client:
                                             start_frame, end_frame,
                                             group=None, options=options)
         elif isinstance(action, LinearMovement):
-            # continue
             LOGGER.debug(colored('Planning Linear Movement {}'.format(action_index), 'cyan'))
             trajectory = plan_linear_movement(client, robot,
                                               state, action.allowed_collision_pairs,
@@ -111,6 +105,6 @@ with PyChoreoClient(viewer=viewer) as client:
 
 if write:
     with open(os.path.join(HERE, 'process.json'), 'w') as f:
-        json.dump(assembly_process, f, cls=DataEncoder, indent=4, sort_keys=True)
+        json.dump(process, f, cls=DataEncoder, indent=4, sort_keys=True)
     LOGGER.info(colored('Process saved to process.json', 'green'))
 
