@@ -76,13 +76,14 @@ with PyChoreoClient(viewer=viewer) as client:
             if start_conf_in_collision:
                 LOGGER.warning(f"Start configuration of action {action_index} is in collision.")
         else:
-            for start_conf in ik_generator(start_frame):
-                if debug:
-                    client.set_robot_configuration(robot, start_conf)
-                    pp.wait_if_gui('Start conf found.')
-                break
-            else:
-                LOGGER.warning(f"Start state of action {action_index} does not have a valid IK solution.")
+            if start_frame is not None:
+                for start_conf in ik_generator(start_frame):
+                    if debug:
+                        client.set_robot_configuration(robot, start_conf)
+                        pp.wait_if_gui('Start conf found.')
+                    break
+                else:
+                    LOGGER.warning(f"Start state of action {action_index} does not have a valid IK solution.")
 
         set_state(client, robot, end_state, options)
         if end_conf is not None:
@@ -90,14 +91,15 @@ with PyChoreoClient(viewer=viewer) as client:
             if end_conf_in_collision:
                 LOGGER.warning(f"End configuration of action {action_index} is in collision.")
         else:
-            for end_conf in ik_generator(end_frame):
-                # * save back to the process
-                if debug:
-                    client.set_robot_configuration(robot, end_conf)
-                    pp.wait_if_gui('End conf found.')
-                break
-            else:
-                LOGGER.warning(f"End state of action {action_index} does not have a valid IK solution.")
+            if end_frame is not None:
+                for end_conf in ik_generator(end_frame):
+                    # * save back to the process
+                    if debug:
+                        client.set_robot_configuration(robot, end_conf)
+                        pp.wait_if_gui('End conf found.')
+                    break
+                else:
+                    LOGGER.warning(f"End state of action {action_index} does not have a valid IK solution.")
 
         if start_conf is not None and end_conf is not None:
             # save the found IK solutions back to the process
@@ -110,3 +112,5 @@ if write:
     with open(os.path.join(HERE, 'process.json'), 'w') as f:
         json.dump(assembly_process, f, cls=DataEncoder, indent=4, sort_keys=True)
     LOGGER.info(colored('Process saved to process.json', 'green'))
+
+LOGGER.info('Check IK finished!')
