@@ -98,7 +98,8 @@ def set_state(client: PyChoreoClient, robot: RobotModel, state: SceneState, opti
         # ! Hard-coded touch_links here to avoid collision between tool and robot link_6
         # This is needed because the tool is attached to the tool0, which is not immediately adjacent to link_6, even though there is no "real" link with collision geometry between them.
         for tool_id, tool_state in state.tool_states.items():
-            client.set_object_frame(tool_id, tool_state.frame)
+            if tool_state.frame:
+                client.set_object_frame(tool_id, tool_state.frame)
             if tool_state.configuration:
                 client.set_tool_configuration(tool_id, tool_state.configuration)
             update_attached_state(tool_id, tool_state, touch_links=['link_6'])
