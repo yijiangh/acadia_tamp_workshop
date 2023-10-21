@@ -119,7 +119,9 @@ def plan_linear_movement(client,
                        max_ik_attempts=100,
                        options=None):
     if start_conf is not None and end_conf is not None:
-        raise ValueError("Cannot specify both start and end configuration in a linear movement. Problem could be overly constrained. Please specify only one of them.")
+        # raise ValueError("Cannot specify both start and end configuration in a linear movement. Problem could be overly constrained. Please specify only one of them.")
+        LOGGER.warning("Cannot specify both start and end configuration in a linear movement. Problem could be overly constrained. We will ignore the end configuration and plan forward.")
+        end_conf = None
 
     options = options or {}
     allowed_collision_pairs = allowed_collision_pairs or []
@@ -138,7 +140,7 @@ def plan_linear_movement(client,
 
     if end_conf is not None:
         plan_forward = False
-        def _end_ik_generator(frame):
+        def _end_ik_generator(frame, init_conf):
             yield end_conf
         initial_ik_generator = _end_ik_generator
 
