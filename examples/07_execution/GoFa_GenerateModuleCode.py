@@ -8,6 +8,7 @@
 
 # Load Process JSON file
 import json
+import math
 import os
 
 from compas.data import DataDecoder, json_dumps
@@ -53,7 +54,9 @@ for action in process.actions:
             continue
         configurations = action.planned_trajectory.points
         for i, conf in enumerate(configurations):
-            target_string = "[[{0:.2f},{0:.2f},{0:.2f},{0:.2f},{0:.2f},{0:.2f}],[9E9,9E9,9E9,9E9,9E9,9E9]]".format(conf.values[0], conf.values[1], conf.values[2], conf.values[3], conf.values[4], conf.values[5])
+            values = list(conf.joint_values)
+            values = [math.degrees(v) for v in values]
+            target_string = "[[{:.2f},{:.2f},{:.2f},{:.2f},{:.2f},{:.2f}],[9E9,9E9,9E9,9E9,9E9,9E9]]".format(values[0], values[1], values[2], values[3], values[4], values[5])
             if i < len(configurations) - 1:
                 command_string = "  MoveAbsJ " + target_string + ",speeddata0,DefaultBlend,tool0;"
             else:
