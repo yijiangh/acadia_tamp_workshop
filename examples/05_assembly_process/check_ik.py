@@ -45,6 +45,7 @@ with PyChoreoClient(viewer=viewer) as client:
 
     ik_generator = get_ik_generator(client, robot, max_attempts=max_ik_attempts,  options=options)
 
+    failed_action_ids = []
     for action in assembly_process.get_robotic_actions():
         action_index = assembly_process.actions.index(action)
         start_state = assembly_process.get_intermediate_state(action_index)
@@ -101,6 +102,8 @@ with PyChoreoClient(viewer=viewer) as client:
             # save the found IK solutions back to the process
             action.planned_trajectory = JointTrajectory(trajectory_points=[start_conf, end_conf], joint_names=start_conf.joint_names,
                 start_configuration=start_conf, fraction=1.0)
+        else:
+            failed_action_ids.append(action_index)
 
         remove_acm(client, acm_name)
 
@@ -110,3 +113,5 @@ if write:
     LOGGER.info(colored('Process saved to process.json', 'green'))
 
 LOGGER.info('Check IK finished!')
+if len(failed_action_ids) > 0:
+    LOGGER.warning(f'Actions that needs care and love (no ik found): {failed_action_ids}')
