@@ -94,6 +94,12 @@ def set_state(client: PyChoreoClient, robot: RobotModel, state: SceneState, opti
                 client.detach_attached_collision_mesh(object_id)
 
     with pp.LockRenderer(not debug):
+        # * Robot
+        # this will need to be set before the tools, because otherwise the tool
+        # will be snapped to the robot disregarding the specified tool_state.frame
+        if state.robot_state.configuration:
+            client.set_robot_configuration(robot, state.robot_state.configuration)
+
         # * Tools
         # ! Hard-coded touch_links here to avoid collision between tool and robot link_6
         # This is needed because the tool is attached to the tool0, which is not immediately adjacent to link_6, even though there is no "real" link with collision geometry between them.
@@ -108,10 +114,6 @@ def set_state(client: PyChoreoClient, robot: RobotModel, state: SceneState, opti
         for wp_id, wp_state in state.workpiece_states.items():
             client.set_object_frame(wp_id, wp_state.frame)
             update_attached_state(wp_id, wp_state)
-
-        # * Robot
-        if state.robot_state.configuration:
-            client.set_robot_configuration(robot, state.robot_state.configuration)
 
 #####################
 

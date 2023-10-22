@@ -28,7 +28,7 @@ def check_state_collisions(client: PyChoreoClient, robot : RobotModel, state: Sc
 
     # * check collision with the robot if a robot configuration is stored in the scene state
     if state.robot_state.configuration:
-        in_collision = client.check_collisions(robot, state.robot_state.configuration, options=options)
+        in_collision = in_collision or client.check_collisions(robot, state.robot_state.configuration, options=options)
 
     if debug and in_collision:
         client._print_object_summary()
@@ -59,8 +59,12 @@ with PyChoreoClient(viewer=viewer) as client:
     set_state(client, robot, initial_state)
 
     failed_action_ids = []
-    for action in assembly_process.get_robotic_actions():
-        action_index = assembly_process.actions.index(action)
+    # for action in assembly_process.get_robotic_actions():
+        # action_index = assembly_process.actions.index(action)
+    for i in [0]:
+        action_index = 45
+        action = assembly_process.actions[action_index]
+
         start_state = assembly_process.get_intermediate_state(action_index)
 
         acm_name = '_action_acm'
@@ -71,7 +75,7 @@ with PyChoreoClient(viewer=viewer) as client:
             LOGGER.warning(f"Start state of action {action_index} ({action.__class__.__name__}) is in collision.")
 
         end_state = assembly_process.get_intermediate_state(action_index+1)
-        end_state_in_collision = check_state_collisions(client, robot, start_state, options)
+        end_state_in_collision = check_state_collisions(client, robot, end_state, options)
         if end_state_in_collision:
             LOGGER.warning(f"End state of action {action_index} ({action.__class__.__name__}) is in collision.")
 
