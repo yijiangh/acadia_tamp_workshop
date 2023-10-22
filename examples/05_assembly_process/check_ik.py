@@ -6,7 +6,7 @@ from termcolor import colored
 from compas.data import DataDecoder, DataEncoder
 from compas_fab.planning import AssemblyProcess, SceneState
 from compas_fab_pychoreo.client import PyChoreoClient
-from compas_fab.robots import JointTrajectory, JointTrajectoryPoint, Duration
+from compas_fab.robots import JointTrajectory, JointTrajectoryPoint, Duration, CollisionMesh
 from compas_fab_pychoreo.conversions import pose_from_frame
 
 import pybullet_planning as pp
@@ -24,7 +24,7 @@ with open(os.path.join(HERE, 'process.json'), 'r') as f:
 viewer = False
 debug = True
 write = True
-max_ik_attempts = 200
+max_ik_attempts = 2000
 
 options = {
     'debug': debug,
@@ -38,6 +38,12 @@ LOGGER.setLevel(logging_level)
 with PyChoreoClient(viewer=viewer) as client:
     initialize_process_scene_state(client, assembly_process)
     robot = load_robot(client, 'abb_crb15000')
+
+    # Add Static Collision Meshes
+    for id in assembly_process.static_collision_meshes:
+        mesh = assembly_process.static_collision_meshes[id]
+        cm = CollisionMesh(mesh, id)
+        client.add_collision_mesh(cm)
 
     # Set Initial State
     initial_state = assembly_process.get_initial_state()
