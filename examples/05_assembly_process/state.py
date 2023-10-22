@@ -55,6 +55,12 @@ def initialize_process_scene_state(client: PyChoreoClient, process: AssemblyProc
         with pp.HideOutput():
             client.add_tool_from_urdf(process.tool_id, process.tool.urdf_file_path(TOOL_EXPORT_DIR))
 
+        # * Add Static Collision Meshes
+        for id in process.static_collision_meshes:
+            mesh = process.static_collision_meshes[id]
+            cm = CollisionMesh(mesh, id)
+            client.add_collision_mesh(cm)
+
 def set_state(client: PyChoreoClient, robot: RobotModel, state: SceneState, options=None):
     """Set the SceneState (state of all objects) to the planner.
 

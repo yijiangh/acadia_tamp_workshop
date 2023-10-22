@@ -49,12 +49,6 @@ with PyChoreoClient(viewer=viewer) as client:
     robot = load_robot(client, 'abb_crb15000')
     options.update(get_tolerances(robot, super_res=True))
 
-    # Add Static Collision Meshes
-    for id in process.static_collision_meshes:
-        mesh = process.static_collision_meshes[id]
-        cm = CollisionMesh(mesh, id)
-        client.add_collision_mesh(cm)
-
     set_state(client, robot, process.get_initial_state(), options)
     # pp.wait_if_gui('Initial State')
 
