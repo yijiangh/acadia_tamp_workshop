@@ -44,17 +44,16 @@ def get_ik_generator(client: PyChoreoClient, robot: RobotModel, group=None, max_
                 LOGGER.debug('IK found in {} iterations'.format(iteration))
                 yield configuration
         else:
-            if IKFAST_INSTALLED:
-                target_pose = pose_from_frame(frame_WCF)
-                pos = pp.point_from_pose(target_pose)
-                rot = pp.matrix_from_quat(pp.quat_from_pose(target_pose)).tolist()
-                conf_candidates = ikfast_abb_crb15000_5_95.get_ik(pos, rot, [])
-                for joint_values in conf_candidates:
-                    conf = Configuration(joint_values=joint_values, joint_types=joint_types, joint_names=ik_joint_names)
-                    if not client.check_collisions(robot, conf, options=options):
-                        LOGGER.debug('IK found by Analytical IKFast')
-                        yield conf
-
+            # if IKFAST_INSTALLED:
+            #     target_pose = pose_from_frame(frame_WCF)
+            #     pos = pp.point_from_pose(target_pose)
+            #     rot = pp.matrix_from_quat(pp.quat_from_pose(target_pose)).tolist()
+            #     conf_candidates = ikfast_abb_crb15000_5_95.get_ik(pos, rot, [])
+            #     for joint_values in conf_candidates:
+            #         conf = Configuration(joint_values=joint_values, joint_types=joint_types, joint_names=ik_joint_names)
+            #         if not client.check_collisions(robot, conf, options=options):
+            #             LOGGER.debug('IK found by Analytical IKFast')
+            #             yield conf
             LOGGER.debug('IK not found in {} iterations'.format(max_attempts))
 
     return ik_generator

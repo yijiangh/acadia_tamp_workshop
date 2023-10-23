@@ -71,7 +71,7 @@ def set_state(client: PyChoreoClient, robot: RobotModel, state: SceneState, opti
 
     def update_attached_state(object_id, object_state, touch_links=None):
         touch_links = touch_links or []
-        object_names, status = client.get_object_names_and_status(object_id)
+        object_names, status = client.get_object_names_and_status(f'^{object_id}$')
         assert status != 'not_exist', 'Object set object id ({}) | body names: {} as attached in scene but object not added to the scene!'.format(object_id, object_names)
 
         if isinstance(object_state, ToolState):
@@ -97,7 +97,7 @@ def set_state(client: PyChoreoClient, robot: RobotModel, state: SceneState, opti
         else:
             # if the current status in the client is not attached, detach it
             if status == 'attached_object':
-                client.detach_attached_collision_mesh(object_id)
+                client.detach_attached_collision_mesh(f'^{object_id}$')
 
     with pp.LockRenderer(not debug):
         # * Robot

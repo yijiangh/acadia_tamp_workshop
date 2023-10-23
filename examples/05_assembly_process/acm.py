@@ -13,12 +13,12 @@ def add_acm(client: PyChoreoClient, state: SceneState, acm_name: str, allowed_co
             for tool_id, tool_state in state.tool_states.items():
                 if tool_state.attached_to_robot:
                     client.extra_disabled_collision_links[acm_name].add(
-                            ((client._get_bodies(wp_id)[0], None), (client._get_bodies(tool_id)[0], None))
+                            ((client._get_bodies(f'^{wp_id}$')[0], None), (client._get_bodies(f'^{tool_id}$')[0], None))
                             )
     # Extra provided ACM
     for id1, id2 in allowed_collision_pairs:
         client.extra_disabled_collision_links[acm_name].add(
-                ((client._get_bodies(id1)[0], None), (client._get_bodies(id2)[0], None))
+                ((client._get_bodies(f'^{id1}$')[0], None), (client._get_bodies(f'^{id2}$')[0], None))
                 )
 
 def remove_acm(client: PyChoreoClient, acm_name: str):
