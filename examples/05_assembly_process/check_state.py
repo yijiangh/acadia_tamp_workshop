@@ -59,10 +59,8 @@ with PyChoreoClient(viewer=viewer) as client:
     set_state(client, robot, initial_state)
 
     failed_action_ids = []
-    # for action in assembly_process.get_robotic_actions():
-        # action_index = assembly_process.actions.index(action)
-    for i in [0]:
-        action_index = 45
+    for action in assembly_process.get_robotic_actions():
+        action_index = assembly_process.actions.index(action)
         action = assembly_process.actions[action_index]
 
         start_state = assembly_process.get_intermediate_state(action_index)
