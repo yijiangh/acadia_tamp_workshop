@@ -63,6 +63,8 @@ with PyChoreoClient(viewer=viewer) as client:
         action_index = assembly_process.actions.index(action)
         action = assembly_process.actions[action_index]
 
+        # Set Start State and check collision
+        print(f'Checking action {action_index} ({action.__class__.__name__}) Start State')
         start_state = assembly_process.get_intermediate_state(action_index)
 
         acm_name = '_action_acm'
@@ -72,11 +74,15 @@ with PyChoreoClient(viewer=viewer) as client:
         if start_state_in_collision:
             LOGGER.warning(f"Start state of action {action_index} ({action.__class__.__name__}) is in collision.")
 
+        # Set End State and check collision
+        print(f'Checking action {action_index} ({action.__class__.__name__}) End State')
         end_state = assembly_process.get_intermediate_state(action_index+1)
         end_state_in_collision = check_state_collisions(client, robot, end_state, options)
         if end_state_in_collision:
             LOGGER.warning(f"End state of action {action_index} ({action.__class__.__name__}) is in collision.")
 
+        # Remove ACM because it is not needed anymore.
+        # This is needed because
         remove_acm(client, acm_name)
 
         if start_state_in_collision or end_state_in_collision:
