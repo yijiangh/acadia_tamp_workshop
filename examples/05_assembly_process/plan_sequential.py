@@ -38,6 +38,7 @@ options = {
     'diagnosis': diagnosis,
     'rrt_restarts': 20,
     'max_ik_attempts': 500,
+    'check_sweeping_collision': False,
     }
 
 # Remove all the trajectories from the process

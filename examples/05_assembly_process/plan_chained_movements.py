@@ -114,6 +114,7 @@ options = {
     'diagnosis': diagnosis,
     'rrt_restarts': 20,
     'max_ik_attempts': 500,
+    'check_sweeping_collision': False,
     }
 
 with PyChoreoClient(viewer=viewer) as client:
@@ -191,7 +192,7 @@ with PyChoreoClient(viewer=viewer) as client:
             if not success:
                 print("- - Failed to plan Linear Movement Group")
                 for action in group:
-                    action.planned_trajectory = None    
+                    action.planned_trajectory = None
         print ("Done Planning FMGs  \n\n")
 
     if planning_scope in ['INDIVIDUAL_MOVEMENTS']:
